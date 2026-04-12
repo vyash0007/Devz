@@ -3,23 +3,52 @@
 @theme {
   --font-main: var(--font-space-grotesk), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
-  --color-accent: #3b82f6;
-  --color-accent-soft: rgba(59, 130, 246, 0.1);
-  --color-bg: #050505;
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-bg: var(--bg);
+  --color-surface-low: var(--surface-low);
+  --color-surface: var(--surface);
+  --color-surface-high: var(--surface-high);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-border-active: var(--border-active);
+  --color-text-muted: var(--text-muted);
 }
 
 :root {
+  --bg: #ffffff;
+  --surface-low: #f8f9fa;
+  --surface: #f1f5f9;
+  --surface-high: #e2e8f0;
+  --border: rgba(0, 0, 0, 0.1);
+  --border-active: rgba(59, 130, 246, 0.4);
+  --accent: #3b82f6; /* Tech Blue */
+  --accent-soft: rgba(59, 130, 246, 0.1);
+  --font-main: var(--font-space-grotesk), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+  --foreground: #020202;
+  --text-muted: rgba(0, 0, 0, 0.5);
+  --grid-line: rgba(0, 0, 0, 0.05);
+  --text-grad-start: #000000;
+  --text-grad-mid: #27272a;
+  --text-grad-end: #71717a;
+}
+
+.dark {
   --bg: #050505;
   --surface-low: #040404;
   --surface: #080808;
   --surface-high: #121212;
   --border: rgba(255, 255, 255, 0.04);
   --border-active: rgba(59, 130, 246, 0.3);
-  --accent: #3b82f6; /* Tech Blue */
+  --accent: #3b82f6;
   --accent-soft: rgba(59, 130, 246, 0.1);
-  --font-main: var(--font-space-grotesk), sans-serif;
-  --font-mono: var(--font-jetbrains-mono), monospace;
   --foreground: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --grid-line: rgba(255, 255, 255, 0.03);
+  --text-grad-start: #ffffff;
+  --text-grad-mid: #ffffff;
+  --text-grad-end: rgba(255, 255, 255, 0.2);
 }
 
 body {
@@ -37,8 +66,8 @@ body {
 /* Data Stream Background */
 .grid-bg {
   background-image: 
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 40px 40px;
   mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), black, transparent 80%);
 }
@@ -145,8 +174,8 @@ body {
 
 /* Specialized Buttons */
 .btn-os {
-  background: #fff;
-  color: #000;
+  background: var(--foreground);
+  color: var(--bg);
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 11px;
@@ -161,7 +190,7 @@ body {
 
 .btn-os:hover {
   background: var(--accent);
-  color: #fff;
+  color: #ffffff;
   transform: skewX(-2deg);
 }
 
@@ -184,20 +213,19 @@ body {
 
 .card-border {
   position: relative;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--grid-line);
+  border: 1px solid var(--border);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-border:hover {
   border-color: var(--accent);
-  background: rgba(255, 255, 255, 0.05);
   box-shadow: 0 0 30px var(--accent-soft);
 }
 
 .btn-primary {
   background: var(--accent);
-  color: #000;
+  color: #ffffff;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -208,15 +236,15 @@ body {
 
 .btn-primary:hover {
   transform: translate(-4px, -4px);
-  box-shadow: 4px 4px 0px #fff;
+  box-shadow: 4px 4px 0px var(--foreground);
 }
 
 /* Industrial Form UI */
 .input-industrial {
   background: transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border);
   padding: 12px 0;
-  color: #fff;
+  color: var(--foreground);
   font-family: var(--font-mono);
   font-size: 13px;
   width: 100%;
@@ -227,11 +255,11 @@ body {
   outline: none;
   border-color: var(--accent);
   padding-left: 8px;
-  background: rgba(59, 130, 246, 0.05);
+  background: var(--accent-soft);
 }
 
 .input-industrial::placeholder {
-  color: rgba(255, 255, 255, 0.2);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
