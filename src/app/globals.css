@@ -177,7 +177,7 @@ body {
   background: var(--foreground);
   color: var(--bg);
   font-family: var(--font-mono);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 11px;
   padding: 10px 24px;
   text-transform: uppercase;
@@ -226,7 +226,7 @@ body {
 .btn-primary {
   background: var(--accent);
   color: #ffffff;
-  font-weight: 800;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: 1rem 2rem;

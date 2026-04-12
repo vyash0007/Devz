@@ -21,7 +21,7 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as any }}
           className="relative glass-card border border-white/[0.08] p-12 md:p-20 text-center overflow-hidden"
         >
           {/* Inner glow */}
@@ -37,11 +37,11 @@ export default function CTASection() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-gradient-to-br from-blue-600/30 to-violet-600/30 blur-3xl pointer-events-none" />
 
           <div className="relative">
-            <p className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-5">
+            <p className="text-xs font-medium uppercase tracking-widest text-violet-400 mb-5">
               Let's Talk
             </p>
 
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.1] mb-6">
               Ready to build something{" "}
               <span className="gradient-text">exceptional?</span>
             </h2>
@@ -56,7 +56,7 @@ export default function CTASection() {
                 href="mailto:hello@devz.agency"
                 whileHover={{ scale: 1.04, boxShadow: "0 0 50px rgba(139,92,246,0.5)" }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-violet-600 shadow-2xl shadow-violet-500/30 transition-shadow duration-300 w-full sm:w-auto justify-center"
+                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-violet-600 shadow-2xl shadow-violet-500/30 transition-shadow duration-300 w-full sm:w-auto justify-center"
               >
                 <MessageCircle className="w-4 h-4" />
                 Start a Project
@@ -67,7 +67,7 @@ export default function CTASection() {
                 href="#"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-sm font-semibold text-slate-300 hover:text-white border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 w-full sm:w-auto justify-center"
+                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-sm font-medium text-slate-300 hover:text-white border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 w-full sm:w-auto justify-center"
               >
                 <CalendarDays className="w-4 h-4" />
                 Book a 30-min Call

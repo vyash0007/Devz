@@ -26,11 +26,10 @@ export default function Navbar() {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
           ? "glass border-b border-white/[0.06] shadow-2xl shadow-black/30"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="section-container">
         <nav className="flex items-center justify-between h-16 sm:h-20">

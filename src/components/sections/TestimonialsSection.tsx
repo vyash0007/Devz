@@ -55,10 +55,10 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">
+          <p className="text-xs font-medium uppercase tracking-widest text-violet-400 mb-3">
             Client Stories
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
             Don't take our{" "}
             <span className="gradient-text">word for it</span>
           </h2>
@@ -75,7 +75,7 @@ export default function TestimonialsSection() {
               transition={{
                 duration: 0.7,
                 delay: i * 0.12,
-                ease: [0.22, 1, 0.36, 1],
+                ease: [0.22, 1, 0.36, 1] as any,
               }}
               className="glass-card p-7 flex flex-col gap-5 border border-white/[0.07]"
             >
@@ -100,7 +100,7 @@ export default function TestimonialsSection() {
               {/* Author */}
               <div className="flex items-center gap-3 mt-auto pt-4 border-t border-white/[0.06]">
                 <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-medium text-white flex-shrink-0"
                   style={{
                     backgroundColor: t.color + "30",
                     border: `1px solid ${t.color}50`,
@@ -110,7 +110,7 @@ export default function TestimonialsSection() {
                   {t.initials}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">{t.name}</p>
+                   <p className="text-sm font-medium text-white">{t.name}</p>
                   <p className="text-[11px] text-slate-500">{t.title}</p>
                 </div>
               </div>

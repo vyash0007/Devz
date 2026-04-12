@@ -78,7 +78,7 @@ const cardVariants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as any },
   },
 };
 
@@ -101,13 +101,13 @@ export default function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as any }}
           className="text-center mb-16"
         >
-          <p className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">
+          <p className="text-xs font-medium uppercase tracking-widest text-violet-400 mb-3">
             What We Do
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
             Every layer of your stack,{" "}
             <span className="gradient-text">covered</span>
           </h2>
@@ -147,7 +147,7 @@ export default function ServicesSection() {
                     <Icon className={`w-5 h-5 ${service.iconColor}`} />
                   </div>
 
-                  <h3 className="text-base font-semibold text-white mb-2.5">
+                  <h3 className="text-base font-medium text-white mb-2.5">
                     {service.title}
                   </h3>
                   <p className="text-slate-400 text-sm leading-relaxed">

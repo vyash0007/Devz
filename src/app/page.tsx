@@ -31,6 +31,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from 'next-themes';
+import { Terminal as TerminalComponent } from '@/components/terminal/Terminal';
 
 const Nav = () => {
   const [time, setTime] = useState('');
@@ -65,14 +66,14 @@ const Nav = () => {
             <div className="w-8 h-8 bg-foreground flex items-center justify-center shrink-0">
               <Terminal size={18} className="text-bg" />
             </div>
-            <span className="mono font-bold tracking-tighter text-xl uppercase text-foreground">Aura_v4</span>
+            <span className="mono font-medium tracking-tighter text-xl uppercase text-foreground">Aura_v4</span>
           </div>
-          
-          <div className="hidden lg:flex gap-8 mono text-[10px] tracking-[0.2em] uppercase font-bold text-foreground/40">
+
+          <div className="hidden lg:flex gap-8 mono text-[10px] tracking-[0.2em] uppercase font-medium text-foreground/40">
             {navLinks.map((link) => (
-              <a 
-                key={link.label} 
-                href={link.href} 
+              <a
+                key={link.label}
+                href={link.href}
                 className={`hover:text-foreground transition-colors ${link.special ? 'text-blue-500' : ''}`}
               >
                 {link.label}
@@ -87,20 +88,20 @@ const Nav = () => {
             <span className="mono text-[10px] text-foreground/70 tabular-nums shrink-0">{time || '00:00:00_LOCAL'}</span>
           </div>
 
-          <button 
+          <button
             onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
             className="hidden sm:flex items-center justify-center w-10 h-10 border border-border text-foreground hover:bg-foreground hover:text-bg transition-colors"
             aria-label="Toggle Theme"
           >
             {mounted && (resolvedTheme === 'dark' ? <Sun size={14} /> : <Moon size={14} />)}
           </button>
-          
+
           <button className="btn-os group hidden sm:flex">
             Connect_Cluster
             <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
           </button>
 
-          <button 
+          <button
             className="lg:hidden p-2 text-foreground/60 hover:text-foreground transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -126,7 +127,7 @@ const Nav = () => {
                     key={link.label}
                     href={link.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className="block text-4xl font-bold uppercase tracking-tighter text-foreground hover:text-blue-500 transition-colors"
+                    className="block text-4xl font-light uppercase tracking-tighter text-foreground hover:text-blue-500 transition-colors"
                   >
                     {link.label}
                   </a>
@@ -137,9 +138,9 @@ const Nav = () => {
                 <div className="flex items-center justify-between">
                   <div className="space-y-2">
                     <p className="mono text-[10px] text-foreground/30 uppercase tracking-widest">Local_Time</p>
-                    <p className="mono text-xl text-foreground font-bold">{time || '00:00:00_LOCAL'}</p>
+                    <p className="mono text-xl text-foreground font-medium">{time || '00:00:00_LOCAL'}</p>
                   </div>
-                  <button 
+                  <button
                     onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
                     className="flex items-center justify-center w-12 h-12 border border-border text-foreground hover:bg-foreground hover:text-bg transition-colors"
                   >
@@ -159,39 +160,7 @@ const Nav = () => {
   );
 };
 
-const AuraTerminal = () => (
-  <div className="relative group perspective-[2000px]">
-    {/* Terminal Window Overlay */}
-    <div className="industrial-card rounded-md overflow-hidden bg-black border-white/20 shadow-2xl z-20">
-      <div className="h-8 bg-surface-high border-b border-white/10 px-4 flex justify-between items-center">
-        <div className="flex gap-1.5">
-          <div className="w-2 h-2 rounded-full bg-red-500/20 border border-red-500/40" />
-          <div className="w-2 h-2 rounded-full bg-yellow-500/20 border border-yellow-500/40" />
-          <div className="w-2 h-2 rounded-full bg-blue-500/20 border border-blue-500/40" />
-        </div>
-        <span className="mono text-[9px] text-white/20 uppercase tracking-widest">Aura_Terminal_v4.2</span>
-        <Settings2 size={10} className="text-white/20 animate-spin-slow" />
-      </div>
-      <div className="p-6 bg-[#020202] h-[180px] overflow-hidden relative">
-        <div className="mono space-y-2">
-          <div className="flex gap-4">
-            <span className="text-blue-500 animate-fade-in">➜</span>
-            <span className="text-white/80 animate-typewriter [animation-delay:0s] inline-block">aura build --target production --optimize alpha</span>
-          </div>
-          <div className="text-white/30 space-y-1 pl-8">
-            <p className="animate-typewriter opacity-0 [animation-delay:2.5s] [animation-fill-mode:forwards]">[0.01s] Analysing Module Tree...</p>
-            <p className="animate-typewriter opacity-0 [animation-delay:3.5s] [animation-fill-mode:forwards]">[0.04s] Kernel Stitching Initiated</p>
-            <p className="animate-typewriter opacity-0 [animation-delay:4.5s] [animation-fill-mode:forwards]">[0.12s] Injecting Secure Primitives</p>
-            <p className="text-blue-500/60 animate-typewriter opacity-0 [animation-delay:5.5s] [animation-fill-mode:forwards]">[0.22s] System Maturation 88%</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    {/* Back Decoration Layers */}
-    <div className="absolute top-0 right-0 w-[80%] h-full border border-border bg-surface-low -z-10 translate-x-12 -translate-y-8 rounded-md" />
-    <div className="absolute bottom-0 left-0 w-[90%] h-[120%] border-l border-border -z-20 -translate-x-12 translate-y-12" />
-  </div>
-);
+const AuraTerminal = TerminalComponent;
 
 const Hero = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -216,7 +185,7 @@ const Hero = () => {
           <span>ESTABLISHING SECURE PROTOCOL... DONE</span>
         </div>
 
-        <h1 className="text-6xl md:text-8xl lg:text-[10vw] font-bold leading-[0.9] md:leading-[0.8] tracking-tighter uppercase mb-12 md:mb-20">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10vw] font-light leading-[0.9] md:leading-[0.8] tracking-tighter uppercase mb-12 md:mb-20">
           ENGINEERING <br className="hidden sm:block" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--text-grad-start)] via-[var(--text-grad-mid)] to-[var(--text-grad-end)] italic sm:ml-[-2vw]">FUTURE-PROOF</span> <br />
           INFRA.
@@ -229,7 +198,7 @@ const Hero = () => {
             </p>
             <div className="flex flex-wrap gap-4">
               <button className="btn-primary w-full sm:w-auto">Initiate Sprint</button>
-              <button className="mono text-[10px] font-bold tracking-widest uppercase border border-border px-8 py-4 hover:bg-foreground hover:text-bg transition-all w-full sm:w-auto text-center">
+              <button className="mono text-[10px] font-medium tracking-widest uppercase border border-border px-8 py-4 hover:bg-foreground hover:text-bg transition-all w-full sm:w-auto text-center">
                 Download_Manifesto.pdf
               </button>
             </div>
@@ -253,7 +222,7 @@ const Marquee = () => {
           {[...Array(2)].map((_, i) => (
             <div key={i} className="flex gap-20 px-10 items-center">
               {partners.map(p => (
-                <span key={p} className="text-6xl md:text-8xl font-black text-foreground/5 hover:text-blue-500/30 transition-colors cursor-default tracking-tighter italic uppercase">{p}</span>
+                <span key={p} className="text-6xl md:text-8xl font-extralight text-foreground/5 hover:text-blue-500/30 transition-colors cursor-default tracking-tighter italic uppercase">{p}</span>
               ))}
             </div>
           ))}
@@ -306,9 +275,9 @@ const SystemFeatureGrid = () => {
           <div className="space-y-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-[1px] bg-blue-500" />
-              <span className="mono text-xs font-bold text-blue-500 uppercase tracking-[0.4em]">Sub_System_Modules</span>
+              <span className="mono text-xs font-semibold text-blue-500 uppercase tracking-[0.4em]">Sub_System_Modules</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none">Deterministic <br /> performance.</h2>
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-light tracking-tighter uppercase leading-none">Deterministic <br /> performance.</h2>
           </div>
           <p className="text-xl text-foreground/50 leading-relaxed max-w-xl font-light italic border-l border-border pl-8">
             Eliminate variance. Aura provides stable performance metrics regardless of load, ensuring your SLAs are mathematical certainties, not hopes.
@@ -327,7 +296,7 @@ const SystemFeatureGrid = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <h4 className="text-2xl font-bold uppercase tracking-tight group-hover:text-foreground transition-colors text-foreground">{f.title}</h4>
+                  <h4 className="text-2xl font-light uppercase tracking-tight group-hover:text-foreground transition-colors text-foreground">{f.title}</h4>
                   <p className="text-sm text-foreground/50 leading-relaxed">{f.desc}</p>
                 </div>
               </div>
@@ -340,7 +309,7 @@ const SystemFeatureGrid = () => {
                 </div>
                 <div className="flex justify-between items-center pt-4 border-t border-border">
                   <span className="mono text-[9px] text-foreground/30 uppercase">{f.metrics.l}</span>
-                  <span className="mono-bold text-[10px] text-blue-400">{f.metrics.v}</span>
+                   <span className="mono text-[10px] font-medium text-blue-400">{f.metrics.v}</span>
                 </div>
                 <div className="h-0.5 w-full bg-border rounded-full overflow-hidden">
                   <div className="h-full bg-blue-500 w-0 group-hover:w-full transition-all duration-700 ease-in-out" />
@@ -359,7 +328,7 @@ const BentoGrid = () => {
     <section id="core" className="py-32 px-6 bg-surface relative z-10">
       <div className="max-w-7xl mx-auto">
         <div className="mb-20 grid md:grid-cols-2 items-end gap-8">
-          <h2 className="text-6xl font-bold tracking-tighter uppercase leading-none">The <br /> Tech Stack.</h2>
+           <h2 className="text-6xl font-light tracking-tighter uppercase leading-none">The <br /> Tech Stack.</h2>
           <p className="mono text-sm text-foreground/50 uppercase tracking-widest border-l border-blue-500/50 pl-6">
             We specialize in low-level performance optimization and high-fidelity user experiences.
           </p>
@@ -373,14 +342,14 @@ const BentoGrid = () => {
                 <div className="w-12 h-12 bg-foreground/5 border border-border flex items-center justify-center mb-10">
                   <Cpu size={24} className="text-blue-400" />
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight uppercase">Parallel Compute Architecture</h3>
+                <h3 className="text-3xl md:text-4xl font-light mb-6 tracking-tight uppercase">Parallel Compute Architecture</h3>
                 <p className="text-foreground/50 text-lg max-w-md">
                   Custom-built backend systems designed to handle horizontal scaling without compromising on single-threaded performance.
                 </p>
               </div>
               <div className="mt-12 md:mt-20 grid grid-cols-3 gap-2 md:gap-4">
                 {['Rust', 'Go', 'K8s'].map(x => (
-                  <div key={x} className="mono text-[8px] md:text-[10px] font-bold p-3 border border-border text-center uppercase tracking-widest tabular-nums bg-surface-low">{x}</div>
+                   <div key={x} className="mono text-[8px] md:text-[10px] font-medium p-3 border border-border text-center uppercase tracking-widest tabular-nums bg-surface-low">{x}</div>
                 ))}
               </div>
             </div>
@@ -391,7 +360,7 @@ const BentoGrid = () => {
             <div className="h-full flex flex-col justify-between min-h-[200px]">
               <ShieldCheck size={32} className="text-blue-400 mb-8 group-hover:rotate-12 transition-transform" />
               <div>
-                <h4 className="text-xl md:text-2xl font-bold uppercase mb-2">Immutable Security</h4>
+                <h4 className="text-xl md:text-2xl font-light uppercase mb-2">Immutable Security</h4>
                 <p className="text-foreground/50 text-sm">Hardened infrastructure with zero-trust protocols at the network level.</p>
               </div>
             </div>
@@ -403,13 +372,13 @@ const BentoGrid = () => {
               <div className="w-2 h-2 rounded-full bg-foreground/10" />
               <div className="w-2 h-2 rounded-full bg-foreground/10" />
             </div>
-            <h4 className="text-xl md:text-2xl font-bold uppercase mb-2">Real-time Pulse</h4>
+             <h4 className="text-xl md:text-2xl font-light uppercase mb-2">Real-time Pulse</h4>
             <p className="text-foreground/50 text-sm">Observability dashboards with sub-second granularity across all nodes.</p>
           </div>
 
           <div className="col-span-12 md:col-span-6 lg:col-span-8 card-border p-8 md:p-10 flex items-center justify-between overflow-hidden bg-bg">
             <div className="relative z-10">
-              <h4 className="text-2xl md:text-3xl font-bold uppercase mb-2">Distributed Sync</h4>
+               <h4 className="text-2xl md:text-3xl font-light uppercase mb-2">Distributed Sync</h4>
               <p className="text-foreground/50 text-sm max-w-xs">Global state management with eventual consistency that feels immediate.</p>
             </div>
             <Braces size={80} className="text-foreground/5 -mr-8 hidden sm:block" />
@@ -427,14 +396,14 @@ const Process = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="space-y-0">
           {steps.map((step, i) => (
-            <div key={step} className="group flex items-center justify-between border-b border-border py-12 cursor-pointer">
-              <div className="flex items-center gap-12">
-                <span className="mono text-foreground/30 text-xl font-bold">0{i + 1}</span>
-                <h3 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter group-hover:text-blue-400 transition-colors duration-500">
+            <div key={step} className="group flex items-center justify-between border-b border-border py-8 md:py-12 cursor-pointer gap-4">
+              <div className="flex items-center gap-4 md:gap-12 overflow-hidden">
+                 <span className="mono text-foreground/30 text-lg md:text-xl font-medium shrink-0">0{i + 1}</span>
+                 <h3 className="text-2xl sm:text-4xl md:text-7xl font-light uppercase tracking-tighter group-hover:text-blue-400 transition-colors duration-500 truncate">
                   {step}
                 </h3>
               </div>
-              <ArrowRight size={40} className="text-foreground/10 group-hover:text-foreground group-hover:translate-x-4 transition-all" />
+              <ArrowRight className="text-foreground/10 group-hover:text-foreground group-hover:translate-x-4 transition-all w-6 h-6 md:w-10 md:h-10 shrink-0" />
             </div>
           ))}
         </div>
@@ -449,12 +418,12 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-20 mb-40">
           <div>
-            <h2 className="text-5xl md:text-7xl lg:text-9xl font-black uppercase tracking-tighter leading-none mb-12">READY <br /> TO <span className="text-blue-400">FLIP</span> <br /> THE SWITCH?</h2>
+             <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-light uppercase tracking-tighter leading-none mb-12">READY <br /> TO <span className="text-blue-400">FLIP</span> <br /> THE SWITCH?</h2>
             <p className="text-xl md:text-2xl text-foreground/50 max-w-sm mb-12 font-light italic">Currently accepting 2 new projects for Q3 2026 delivery.</p>
             <button className="btn-primary text-lg md:text-xl px-8 md:px-12 py-4 md:py-6">Open Channel</button>
           </div>
           <div className="space-y-20">
-            <div className="grid grid-cols-2 gap-8 mono text-[10px] font-bold tracking-widest uppercase text-foreground/50">
+             <div className="grid grid-cols-2 gap-8 mono text-[10px] font-medium tracking-widest uppercase text-foreground/50">
               <div className="space-y-4">
                 <p className="text-foreground">Socials</p>
                 <a href="#" className="block hover:text-blue-400">X / Twitter</a>
@@ -470,7 +439,7 @@ const Footer = () => {
             <div className="card-border p-10 border-blue-500/10 bg-surface">
               <div className="flex items-center gap-3 mb-10">
                 <Radio size={12} className="text-blue-500 animate-pulse" />
-                <p className="mono text-[10px] text-blue-400 font-bold uppercase tracking-[0.2em]">Initialize_Comm_Link</p>
+                 <p className="mono text-[10px] text-blue-400 font-medium uppercase tracking-[0.2em]">Initialize_Comm_Link</p>
               </div>
               <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
                 <div className="space-y-1">

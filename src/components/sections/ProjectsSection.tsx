@@ -62,7 +62,7 @@ function ProjectCard({
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.65, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.65, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] as any }}
       whileHover={{ y: -5, transition: { duration: 0.25 } }}
       className={`group relative glass-card overflow-hidden border border-white/[0.07] ${project.borderHover} transition-all duration-300 cursor-pointer flex flex-col h-full`}
     >
@@ -77,7 +77,7 @@ function ProjectCard({
       >
         <div className="absolute inset-0 grid-bg opacity-40" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className={`text-4xl font-black ${project.textAccent} opacity-20 group-hover:opacity-40 transition-opacity select-none`}>
+          <span className={`text-4xl font-medium ${project.textAccent} opacity-20 group-hover:opacity-40 transition-opacity select-none`}>
             {project.title.charAt(0)}
           </span>
         </div>
@@ -86,10 +86,10 @@ function ProjectCard({
       <div className="relative p-6 flex flex-col flex-1">
         <div className="flex items-start justify-between gap-3 mb-3">
           <div>
-            <p className={`text-[11px] font-semibold uppercase tracking-wider ${project.textAccent} mb-1`}>
+            <p className={`text-[11px] font-medium uppercase tracking-wider ${project.textAccent} mb-1`}>
               {project.category}
             </p>
-            <h3 className="text-lg font-bold text-white leading-tight">
+            <h3 className="text-lg font-light text-white leading-tight">
               {project.title}
             </h3>
           </div>
@@ -110,7 +110,7 @@ function ProjectCard({
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.06] text-[11px] font-medium text-slate-400"
+              className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.06] text-[11px] font-light text-slate-400"
             >
               {tag}
             </span>
@@ -139,14 +139,14 @@ export default function ProjectsSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as any }}
           className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12"
         >
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">
+            <p className="text-xs font-medium uppercase tracking-widest text-violet-400 mb-3">
               Selected Work
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
               Built with{" "}
               <span className="gradient-text">intention</span>
             </h2>
@@ -184,7 +184,7 @@ export default function ProjectsSection() {
         >
           <a
             href="#"
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition-colors group"
+            className="inline-flex items-center gap-2 text-sm font-light text-slate-400 hover:text-white transition-colors group"
           >
             View all case studies
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

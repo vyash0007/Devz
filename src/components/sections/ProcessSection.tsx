@@ -68,13 +68,13 @@ export default function ProcessSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as any }}
           className="text-center mb-20"
         >
-          <p className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">
+          <p className="text-xs font-medium uppercase tracking-widest text-violet-400 mb-3">
             How We Work
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
             A process built for{" "}
             <span className="gradient-text">clarity</span>
           </h2>
@@ -101,7 +101,7 @@ export default function ProcessSection() {
                   transition={{
                     duration: 0.65,
                     delay: i * 0.12,
-                    ease: [0.22, 1, 0.36, 1],
+                    ease: [0.22, 1, 0.36, 1] as any,
                   }}
                   className="flex flex-col items-center lg:items-start text-center lg:text-left"
                 >
@@ -112,12 +112,12 @@ export default function ProcessSection() {
                     >
                       <Icon className={`w-6 h-6 ${step.color}`} />
                     </div>
-                    <span className="absolute -top-2 -right-2 text-[10px] font-bold text-slate-600 border border-white/[0.06] bg-[#0B0F19] rounded-full px-1.5 py-0.5">
+                    <span className="absolute -top-2 -right-2 text-[10px] font-medium text-slate-600 border border-white/[0.06] bg-[#0B0F19] rounded-full px-1.5 py-0.5">
                       {step.number}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-semibold text-white mb-2">
+                  <h3 className="text-base font-medium text-white mb-2">
                     {step.title}
                   </h3>
                   <p className="text-slate-400 text-sm leading-relaxed">
@@ -139,7 +139,7 @@ export default function ProcessSection() {
         >
           <p className="text-slate-500 text-sm italic max-w-md mx-auto">
             "The average project goes from kickoff to launch in{" "}
-            <span className="text-white not-italic font-semibold">
+            <span className="text-white not-italic font-medium">
               8–12 weeks
             </span>
             , with weekly check-ins throughout."

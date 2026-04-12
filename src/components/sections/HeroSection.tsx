@@ -9,18 +9,21 @@ function FloatingCard({
   className,
   delay = 0,
   children,
+  style,
 }: {
   className?: string;
   delay?: number;
   children: React.ReactNode;
+  style?: React.CSSProperties;
 }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as any }}
       className={`glass-card p-4 shadow-2xl shadow-black/40 ${className}`}
       style={{
+        ...style,
         animation: `float ${6 + delay}s ease-in-out ${delay}s infinite`,
       }}
     >
@@ -57,7 +60,7 @@ const textVariant = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as any },
   },
 };
 
