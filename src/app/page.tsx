@@ -27,11 +27,18 @@ import {
   X,
   Link as LinkIcon,
   Sun,
-  Moon
+  Moon,
+  Star
 } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import { Terminal as TerminalComponent } from '@/components/terminal/Terminal';
+import { DiscoveryDetail } from '@/components/sections/DiscoveryDetail';
+import { ProjectsDetail } from '@/components/sections/ProjectsDetail';
+import { EngineeringDetail } from '@/components/sections/EngineeringDetail';
+import { FaqDetail } from '@/components/sections/FaqDetail';
 
 const Nav = () => {
   const [time, setTime] = useState('');
@@ -55,7 +62,7 @@ const Nav = () => {
     { label: 'Lab', href: '#lab' },
     { label: 'Core', href: '#core' },
     { label: 'Logs', href: '#logs' },
-    { label: 'Secure_Line', href: '#contact', special: true },
+    { label: 'Projects', href: '/projects' },
   ];
 
   return (
@@ -71,13 +78,13 @@ const Nav = () => {
 
           <div className="hidden lg:flex gap-8 mono text-[10px] tracking-[0.2em] uppercase font-medium text-foreground/40">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
-                className={`hover:text-foreground transition-colors ${link.special ? 'text-blue-500' : ''}`}
+                className="hover:text-foreground transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -93,12 +100,12 @@ const Nav = () => {
             className="hidden sm:flex items-center justify-center w-10 h-10 border border-border text-foreground hover:bg-foreground hover:text-bg transition-colors"
             aria-label="Toggle Theme"
           >
-            {mounted && (resolvedTheme === 'dark' ? <Sun size={14} /> : <Moon size={14} />)}
+            {mounted && (resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />)}
           </button>
 
-          <button className="btn-os group flex sm:flex !px-3 !py-1 sm:!px-6 sm:!py-2.5 text-[9px] sm:text-[11px]">
+          <button className="hidden sm:inline-flex btn-os text-[10px] py-2 px-6">
             Connect_Cluster
-            <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight size={14} />
           </button>
 
           <button
@@ -123,14 +130,14 @@ const Nav = () => {
             <div className="space-y-12">
               <div className="space-y-8">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.label}
                     href={link.href}
                     onClick={() => setIsMenuOpen(false)}
                     className="block text-4xl font-light uppercase tracking-tighter text-foreground hover:text-blue-500 transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
 
@@ -179,7 +186,7 @@ const Hero = () => {
       <div className="absolute inset-0 grid-bg z-0" />
       <div className="flare" />
 
-      <div className="relative z-10 max-w-7xl w-full pt-32 sm:pt-24 md:pt-0">
+      <div className="relative z-10 max-w-7xl w-full pt-52 sm:pt-40 md:pt-56 lg:pt-0">
         <h1 className="text-[12vw] sm:text-7xl md:text-8xl lg:text-[10vw] font-light leading-[0.9] md:leading-[0.8] tracking-tighter uppercase mb-12 md:mb-20">
           ENGINEERING <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--text-grad-start)] via-[var(--text-grad-mid)] to-[var(--text-grad-end)] italic sm:ml-[-2vw] whitespace-nowrap">FUTURE-PROOF</span> <br />
@@ -199,7 +206,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="sm:mt-0 lg:relative lg:-mt-30">
+          <div className="sm:mt-0 lg:relative lg:-mt-20">
             <AuraTerminal />
           </div>
         </div>
@@ -385,20 +392,63 @@ const BentoGrid = () => {
 };
 
 const Process = () => {
-  const steps = ["Discovery", "Architecture", "Engineering", "Hyper-Scale"];
+  const [activeStep, setActiveStep] = useState(0);
+  const steps = ["Discovery", "Our Projects", "Engineering", "FAQs"];
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = (i: number) => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    hoverTimeoutRef.current = setTimeout(() => {
+      setActiveStep(i);
+    }, 150);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+  };
+
   return (
     <section id="lab" className="py-32 bg-bg border-y border-border relative z-10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="space-y-0">
           {steps.map((step, i) => (
-            <div key={step} className="group flex items-center justify-between border-b border-border py-8 md:py-12 cursor-pointer gap-4">
-              <div className="flex items-center gap-4 md:gap-12 overflow-hidden">
-                 <span className="mono text-foreground/30 text-lg md:text-xl font-medium shrink-0">0{i + 1}</span>
-                 <h3 className="text-2xl sm:text-4xl md:text-7xl font-light uppercase tracking-tighter group-hover:text-blue-400 transition-colors duration-500 truncate">
-                  {step}
-                </h3>
+            <div key={step}>
+              <div 
+                onClick={() => {
+                  if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+                  setActiveStep(activeStep === i ? -1 : i);
+                }}
+                onMouseEnter={() => handleMouseEnter(i)}
+                onMouseLeave={handleMouseLeave}
+                className="group flex items-center justify-between border-b border-border py-8 md:py-12 cursor-pointer gap-4 transition-all duration-[1200ms]"
+              >
+                <div className="flex items-center gap-4 md:gap-12 overflow-hidden">
+                   <span className="mono text-foreground/30 text-lg md:text-xl font-medium shrink-0">0{i + 1}</span>
+                   <h3 className={`text-2xl sm:text-4xl md:text-7xl font-light uppercase tracking-tighter transition-colors duration-[1200ms] truncate ${activeStep === i ? 'text-blue-400' : 'group-hover:text-blue-400'}`}>
+                    {step}
+                  </h3>
+                </div>
+                <div className={`transition-transform duration-[1200ms] ${activeStep === i ? 'rotate-90 text-blue-400' : 'text-foreground/10 group-hover:text-foreground group-hover:translate-x-4'}`}>
+                  <ArrowRight className="w-6 h-6 md:w-10 md:h-10 shrink-0" />
+                </div>
               </div>
-              <ArrowRight className="text-foreground/10 group-hover:text-foreground group-hover:translate-x-4 transition-all w-6 h-6 md:w-10 md:h-10 shrink-0" />
+
+              <AnimatePresence>
+                {activeStep === i && (
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
+                    className="overflow-hidden"
+                  >
+                    {step === "Discovery" && <DiscoveryDetail />}
+                    {step === "Our Projects" && <ProjectsDetail />}
+                    {step === "Engineering" && <EngineeringDetail />}
+                    {step === "FAQs" && <FaqDetail />}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>
