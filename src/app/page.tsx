@@ -96,7 +96,7 @@ const Nav = () => {
             {mounted && (resolvedTheme === 'dark' ? <Sun size={14} /> : <Moon size={14} />)}
           </button>
 
-          <button className="btn-os group hidden sm:flex">
+          <button className="btn-os group flex sm:flex !px-3 !py-1 sm:!px-6 sm:!py-2.5 text-[9px] sm:text-[11px]">
             Connect_Cluster
             <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
           </button>
@@ -147,7 +147,7 @@ const Nav = () => {
                     {mounted && (resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />)}
                   </button>
                 </div>
-                <button className="btn-os w-full justify-center text-sm py-5">
+                <button className="btn-os w-full justify-center text-xs py-3">
                   Connect_Cluster
                   <ArrowRight size={16} />
                 </button>
@@ -175,23 +175,18 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center px-6 md:px-20 overflow-hidden">
+    <section ref={containerRef} className="relative min-h-screen flex items-start md:items-center px-6 md:px-20 overflow-hidden">
       <div className="absolute inset-0 grid-bg z-0" />
       <div className="flare" />
 
-      <div className="relative z-10 max-w-7xl w-full pt-24">
-        <div className="mono text-blue-400 text-xs mb-2 flex items-center gap-3">
-          <Radio size={14} className="animate-ping" />
-          <span>ESTABLISHING SECURE PROTOCOL... DONE</span>
-        </div>
-
-        <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10vw] font-light leading-[0.9] md:leading-[0.8] tracking-tighter uppercase mb-12 md:mb-20">
-          ENGINEERING <br className="hidden sm:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--text-grad-start)] via-[var(--text-grad-mid)] to-[var(--text-grad-end)] italic sm:ml-[-2vw]">FUTURE-PROOF</span> <br />
+      <div className="relative z-10 max-w-7xl w-full pt-32 sm:pt-24 md:pt-0">
+        <h1 className="text-[12vw] sm:text-7xl md:text-8xl lg:text-[10vw] font-light leading-[0.9] md:leading-[0.8] tracking-tighter uppercase mb-12 md:mb-20">
+          ENGINEERING <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--text-grad-start)] via-[var(--text-grad-mid)] to-[var(--text-grad-end)] italic sm:ml-[-2vw] whitespace-nowrap">FUTURE-PROOF</span> <br />
           INFRA.
         </h1>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-12 items-start">
           <div className="space-y-10">
             <p className="text-lg md:text-3xl text-foreground/50 max-w-xl leading-snug md:leading-tight font-light mb-8">
               We build the systems that the world's most ambitious companies run on. Zero lag. Infinite scale. Total control.
@@ -204,7 +199,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="hidden sm:block lg:relative lg:-mt-30">
+          <div className="sm:mt-0 lg:relative lg:-mt-30">
             <AuraTerminal />
           </div>
         </div>
@@ -277,7 +272,7 @@ const SystemFeatureGrid = () => {
               <div className="w-12 h-[1px] bg-blue-500" />
               <span className="mono text-xs font-semibold text-blue-500 uppercase tracking-[0.4em]">Sub_System_Modules</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl md:text-7xl font-light tracking-tighter uppercase leading-none">Deterministic <br /> performance.</h2>
+            <h2 className="text-5xl sm:text-6xl md:text-7xl font-light tracking-tighter uppercase leading-none">Deterministic <br /> performance.</h2>
           </div>
           <p className="text-xl text-foreground/50 leading-relaxed max-w-xl font-light italic border-l border-border pl-8">
             Eliminate variance. Aura provides stable performance metrics regardless of load, ensuring your SLAs are mathematical certainties, not hopes.
@@ -418,7 +413,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-20 mb-40">
           <div>
-             <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-light uppercase tracking-tighter leading-none mb-12">READY <br /> TO <span className="text-blue-400">FLIP</span> <br /> THE SWITCH?</h2>
+             <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light uppercase tracking-tighter leading-none mb-12">READY <br /> TO <span className="text-blue-400">FLIP</span> <br /> THE SWITCH?</h2>
             <p className="text-xl md:text-2xl text-foreground/50 max-w-sm mb-12 font-light italic">Currently accepting 2 new projects for Q3 2026 delivery.</p>
             <button className="btn-primary text-lg md:text-xl px-8 md:px-12 py-4 md:py-6">Open Channel</button>
           </div>

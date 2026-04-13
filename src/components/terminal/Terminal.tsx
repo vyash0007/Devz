@@ -144,8 +144,8 @@ export const Terminal = () => {
       </motion.div>
 
       {/* Back Decoration Layers */}
-      <div className="absolute top-0 right-0 w-[80%] h-full border border-border bg-surface-low -z-10 translate-x-12 -translate-y-8 rounded-md" />
-      <div className="absolute bottom-0 left-0 w-[90%] h-[120%] border-l border-border -z-20 -translate-x-12 translate-y-12" />
+      <div className="hidden sm:block absolute top-0 right-0 w-[80%] h-full border border-border bg-surface-low -z-10 translate-x-12 -translate-y-8 rounded-md" />
+      <div className="hidden sm:block absolute bottom-0 left-0 w-[90%] h-[120%] border-l border-border -z-20 -translate-x-12 translate-y-12" />
     </div>
   );
 };
