@@ -75,10 +75,14 @@ export const EngineeringDetail = () => {
     <div className="py-20 md:py-32">
       <div className="max-w-4xl mb-20 space-y-8">
         <h2 className="text-4xl md:text-5xl lg:text-7xl font-medium tracking-tighter leading-[0.95]">
-          Built on today&apos;s most <br className="hidden md:block" /> powerful platforms <br className="hidden md:block" /> and frameworks
+          BUILT ON MODERN
+          <br /> <span className="text-blue-400 italic"> TECHNOLOGY STACKS</span>
         </h2>
         <p className="text-lg md:text-xl text-foreground/70 font-light leading-relaxed max-w-3xl">
-          Whether you&apos;re launching the next million-dollar Shopify store or upgrading a custom eCommerce dashboard, we&apos;ll build a solution that fits your business. Our platforms are scalable, lightning-fast, and built with modern tools your team will actually enjoy using.
+          We use production-grade tools and frameworks to build systems that are fast,
+          scalable, and reliable.
+          <br />
+          Every technology we choose is tested, practical, and aligned with real-world use.
         </p>
       </div>
 
@@ -96,7 +100,7 @@ export const EngineeringDetail = () => {
           >
             {/* Corner Square */}
             <div className="absolute top-4 right-4 w-1.5 h-1.5 md:w-2 md:h-2 bg-foreground/20 group-hover:bg-blue-400 transition-colors duration-500" />
-            
+
             {/* Optional Diagonal Arrow */}
             {tech.hasArrow && (
               <ArrowUpRight strokeWidth={1.5} size={20} className="absolute top-4 right-10 text-foreground/40 group-hover:text-blue-400 transition-colors duration-500" />

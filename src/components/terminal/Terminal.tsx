@@ -36,8 +36,8 @@ const useTerminalSequence = (lines: { text: string; delay?: number; highlight?: 
     }
   }, [currentText, isStarted, visibleLines, lines]);
 
-  return { 
-    completedLines: lines.slice(0, visibleLines), 
+  return {
+    completedLines: lines.slice(0, visibleLines),
     typingLine: visibleLines < lines.length ? currentText : null,
     totalCompleted: visibleLines === lines.length
   };
@@ -54,7 +54,7 @@ export const Terminal = () => {
 
   const [commandFinished, setCommandFinished] = useState(false);
   const commandEffect = useTerminalSequence([{ text: commandLine, delay: 600 }], 1500);
-  
+
   useEffect(() => {
     if (commandEffect.totalCompleted) setCommandFinished(true);
   }, [commandEffect.totalCompleted]);
@@ -66,8 +66,8 @@ export const Terminal = () => {
     <div className="relative group perspective-[2000px] w-full max-w-2xl mx-auto lg:mx-0">
       {/* Subtle Outer Glow */}
       <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
-      <motion.div 
+
+      <motion.div
         className="industrial-card relative bg-surface border border-border rounded-xl shadow-2xl overflow-hidden flex flex-col z-20"
       >
         {/* Window Header */}
@@ -92,7 +92,7 @@ export const Terminal = () => {
             <span className="text-foreground/90">
               {commandEffect.completedLines.length > 0 ? commandLine : commandEffect.typingLine}
               {(!commandFinished || (commandFinished && activeLogEffect.totalCompleted)) && (
-                <motion.span 
+                <motion.span
                   animate={{ opacity: [1, 0] }}
                   transition={{ repeat: Infinity, duration: 0.8 }}
                   className="inline-block w-2 h-4 bg-accent ml-1 translate-y-0.5"
@@ -104,19 +104,19 @@ export const Terminal = () => {
           {/* Log Lines */}
           <div className="space-y-1.5 pl-7">
             {activeLogEffect.completedLines.map((log, index) => (
-              <div 
+              <div
                 key={index}
                 className={`flex items-center gap-3 ${log.highlight ? 'text-accent mt-2 font-bold' : 'text-text-muted'}`}
               >
-                {!log.highlight && <span className="text-[10px] opacity-30 select-none">[{ (0.01 + index * 0.04).toFixed(2) }s]</span>}
+                {!log.highlight && <span className="text-[10px] opacity-30 select-none">[{(0.01 + index * 0.04).toFixed(2)}s]</span>}
                 <span>{log.text}</span>
               </div>
             ))}
             {activeLogEffect.typingLine && (
               <div className="flex items-center gap-3 text-text-muted">
-                <span className="text-[10px] opacity-30 select-none">[{ (0.01 + activeLogEffect.completedLines.length * 0.04).toFixed(2) }s]</span>
+                <span className="text-[10px] opacity-30 select-none">[{(0.01 + activeLogEffect.completedLines.length * 0.04).toFixed(2)}s]</span>
                 <span>{activeLogEffect.typingLine}</span>
-                <motion.span 
+                <motion.span
                   animate={{ opacity: [1, 0] }}
                   transition={{ repeat: Infinity, duration: 0.4 }}
                   className="inline-block w-1.5 h-3 bg-foreground/20 ml-1"
@@ -130,12 +130,12 @@ export const Terminal = () => {
         <div className="px-6 py-4 border-t border-border bg-foreground/[0.02] flex justify-between items-center">
           <div className="flex items-center gap-4">
             <div className="h-1 w-24 bg-foreground/10 rounded-full overflow-hidden">
-               <motion.div 
+              <motion.div
                 initial={{ width: 0 }}
                 animate={commandFinished ? { width: '100%' } : {}}
                 transition={{ duration: 3 }}
                 className="h-full bg-accent/40"
-               />
+              />
             </div>
             <span className="text-[9px] text-text-muted mono uppercase tracking-tight">CPU: 12%</span>
           </div>
