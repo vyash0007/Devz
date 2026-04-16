@@ -1,120 +1,140 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import Link from "next/link";
-
-const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Work", href: "#projects" },
-  { label: "Testimonials", href: "#testimonials" },
-];
+import React, { useState, useEffect } from 'react';
+import { Terminal, ArrowRight, Sun, Moon, X, Menu } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from 'next-themes';
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [time, setTime] = useState('');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    setMounted(true);
+    const updateTime = () => {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+      setTime(`${timeStr}_LOCAL`);
+    };
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
   }, []);
 
+  const navLinks = [
+    { label: 'Projects', href: '/projects' },
+    { label: 'About', href: '/about' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Contact', href: '/contact' },
+  ];
+
   return (
-    <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-          ? "glass border-b border-white/[0.06] shadow-2xl shadow-black/30"
-          : "bg-transparent"
-        }`}
-    >
-      <div className="section-container">
-        <nav className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
+    <>
+      <nav className="fixed top-0 w-full z-[100] px-6 py-4 md:px-12 flex justify-between items-center border-b border-border bg-bg/70 backdrop-blur-xl">
+        <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center shadow-lg shadow-violet-500/20 group-hover:shadow-violet-500/40 transition-shadow duration-300">
-              <span className="text-white font-bold text-sm tracking-tight">D</span>
+            <div className="w-8 h-8 bg-foreground flex items-center justify-center shrink-0">
+              <Terminal size={18} className="text-bg" />
             </div>
-            <span className="text-white font-semibold text-lg tracking-tight">
-              Devz
-            </span>
+            <span className="mono font-medium tracking-tighter text-xl uppercase text-foreground">Aura_v4</span>
           </Link>
 
-          {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex gap-8 mono text-[10px] tracking-[0.2em] uppercase font-medium text-foreground/40">
             {navLinks.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="text-sm text-slate-400 hover:text-white transition-colors duration-200 font-medium"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          {/* CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <a
-              href="#contact"
-              className="relative px-5 py-2.5 text-sm font-semibold text-white rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 transition-all duration-300 shadow-lg shadow-violet-500/20 hover:shadow-violet-500/40 hover:scale-105 active:scale-95"
-            >
-              Start a Project
-            </a>
-          </div>
-
-          {/* Mobile Hamburger */}
-          <button
-            className="md:hidden flex flex-col gap-1.5 p-2"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-          >
-            <motion.span
-              animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 8 : 0 }}
-              className="w-5 h-0.5 bg-slate-400 block rounded-full transition-all"
-            />
-            <motion.span
-              animate={{ opacity: mobileOpen ? 0 : 1 }}
-              className="w-5 h-0.5 bg-slate-400 block rounded-full"
-            />
-            <motion.span
-              animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -8 : 0 }}
-              className="w-5 h-0.5 bg-slate-400 block rounded-full"
-            />
-          </button>
-        </nav>
-
-        {/* Mobile Menu */}
-        <motion.div
-          initial={false}
-          animate={{ height: mobileOpen ? "auto" : 0, opacity: mobileOpen ? 1 : 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="md:hidden overflow-hidden"
-        >
-          <div className="pb-6 pt-2 flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="text-slate-300 hover:text-white text-base font-medium transition-colors py-1"
+                className={`transition-colors ${
+                  pathname === link.href 
+                    ? 'text-blue-400 opacity-100' 
+                    : 'hover:text-foreground/80'
+                }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#contact"
-              className="inline-flex w-full justify-center px-5 py-3 text-sm font-semibold text-white rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 mt-2"
-            >
-              Start a Project
-            </a>
           </div>
-        </motion.div>
-      </div>
-    </motion.header>
+        </div>
+
+        <div className="flex items-center gap-4 md:gap-8 lg:gap-12">
+          <div className="hidden sm:flex items-center gap-4 border-x border-border px-8 h-12">
+            <span className="mono text-[9px] text-foreground/30 uppercase tracking-widest">Local_Time</span>
+            <span className="mono text-[10px] text-foreground/70 tabular-nums shrink-0">{time || '00:00:00_LOCAL'}</span>
+          </div>
+
+          <button
+            onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+            className="hidden sm:flex items-center justify-center w-10 h-10 border border-border text-foreground hover:bg-foreground hover:text-bg transition-colors"
+            aria-label="Toggle Theme"
+          >
+            {mounted && (resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />)}
+          </button>
+
+          <button className="hidden sm:inline-flex btn-os text-[10px] py-2 px-6">
+            Discuss Project
+            <ArrowRight size={14} />
+          </button>
+
+          <button
+            className="lg:hidden p-2 text-foreground/60 hover:text-foreground transition-colors"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[90] bg-bg pt-32 px-10 lg:hidden"
+          >
+            <div className="space-y-12">
+              <div className="space-y-8">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="block text-4xl font-light uppercase tracking-tighter text-foreground hover:text-blue-500 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+
+              <div className="pt-12 border-t border-border space-y-8">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-2">
+                    <p className="mono text-[10px] text-foreground/30 uppercase tracking-widest">Local_Time</p>
+                    <p className="mono text-xl text-foreground font-medium">{time || '00:00:00_LOCAL'}</p>
+                  </div>
+                  <button
+                    onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+                    className="flex items-center justify-center w-12 h-12 border border-border text-foreground hover:bg-foreground hover:text-bg transition-colors"
+                  >
+                    {mounted && (resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />)}
+                  </button>
+                </div>
+                <button className="btn-os w-full justify-center text-xs py-3">
+                  Connect_Cluster
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
