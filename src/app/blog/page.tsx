@@ -18,7 +18,17 @@ export default function BlogPage() {
     fetch('/api/blog')
       .then(res => res.json())
       .then(data => {
-        setPosts(data);
+        if (Array.isArray(data)) {
+          setPosts(data);
+        } else {
+          console.error('Invalid blog data format received:', data);
+          setPosts([]);
+        }
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Core data access failure:', err);
+        setPosts([]);
         setLoading(false);
       });
   }, []);

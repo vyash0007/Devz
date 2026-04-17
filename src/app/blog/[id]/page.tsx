@@ -17,9 +17,14 @@ export default function BlogDetailPage() {
   useEffect(() => {
     fetch('/api/blog')
       .then(res => res.json())
-      .then(posts => {
-        const foundPost = posts.find((p: BlogPost) => p.id.toString() === params.id);
-        setPost(foundPost);
+      .then(data => {
+        const postsArray = Array.isArray(data) ? data : [];
+        const foundPost = postsArray.find((p: BlogPost) => p.id.toString() === params.id);
+        setPost(foundPost || null);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Core data access failure:', err);
         setLoading(false);
       });
   }, [params.id]);
