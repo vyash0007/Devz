@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
 import { neon } from '@neondatabase/serverless';
-import fs from 'fs/promises';
-import path from 'path';
 
 // Initialize Neon client
 const sql = neon(process.env.DATABASE_URL!);
@@ -19,27 +17,6 @@ async function initializeTable() {
         content TEXT
       );
     `;
-
-    // Optional: Migrate local data if the database is empty
-    const countResult = await sql`SELECT count(*) FROM posts`;
-    if (countResult[0] && (countResult[0].count === '0' || countResult[0].count === 0)) {
-      try {
-        const localPath = path.join(process.cwd(), 'src', 'data', 'posts.json');
-        const fileContents = await fs.readFile(localPath, 'utf8');
-        const localPosts = JSON.parse(fileContents);
-        if (Array.isArray(localPosts)) {
-          for (const post of localPosts) {
-            await sql`
-              INSERT INTO posts (id, title, excerpt, date, author, category, content)
-              VALUES (${post.id}, ${post.title}, ${post.excerpt}, ${post.date}, ${post.author}, ${post.category}, ${post.content})
-              ON CONFLICT (id) DO NOTHING
-            `;
-          }
-        }
-      } catch (e) {
-        // Ignore if file not found or already migrated
-      }
-    }
   } catch (error) {
     console.error('Failed to initialize posts table:', error);
   }

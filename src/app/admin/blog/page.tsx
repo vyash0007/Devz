@@ -12,6 +12,7 @@ export default function AdminBlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [password, setPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loginError, setLoginError] = useState(false);
@@ -22,6 +23,27 @@ export default function AdminBlogPage() {
     type: 'alert' as 'alert' | 'confirm' | 'error',
     onConfirm: () => {}
   });
+
+  const handleLogin = async () => {
+    setIsLoggingIn(true);
+    setLoginError(false);
+    try {
+      const res = await fetch('/api/auth/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      });
+      if (res.ok) {
+        setIsAuthenticated(true);
+      } else {
+        setLoginError(true);
+      }
+    } catch (err) {
+      setLoginError(true);
+    } finally {
+      setIsLoggingIn(false);
+    }
+  };
 
   useEffect(() => {
     fetch('/api/blog')
@@ -134,19 +156,26 @@ export default function AdminBlogPage() {
               <label className="mono text-[9px] text-foreground/30 uppercase block mb-1">Access_Key_Hash</label>
               <input 
                 type="password"
-                className="input-industrial" 
+                className={`input-industrial ${loginError ? 'border-red-500 bg-red-500/5' : ''}`} 
                 placeholder="************"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && setIsAuthenticated(true)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setLoginError(false);
+                }}
+                onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
               />
+              {loginError && (
+                <p className="mono text-[8px] text-red-500 mt-2 uppercase tracking-tight">Error: Access_Denied / Key_Mismatch</p>
+              )}
             </div>
             
             <button 
-              onClick={() => setIsAuthenticated(true)}
-              className="btn-os w-full justify-center bg-foreground text-bg hover:bg-blue-500 hover:text-white"
+              onClick={handleLogin}
+              disabled={isLoggingIn}
+              className="btn-os w-full justify-center bg-foreground text-bg hover:bg-blue-500 hover:text-white disabled:opacity-50"
             >
-              INITIALIZE_LINK
+              {isLoggingIn ? 'Verifying_Identity...' : 'INITIALIZE_LINK'}
             </button>
             
             <p className="text-[9px] text-foreground/20 text-center mono uppercase">
