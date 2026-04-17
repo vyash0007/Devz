@@ -4,6 +4,62 @@ import React from 'react';
 import { ArrowRight, Radio } from 'lucide-react';
 
 export const Contact = () => {
+  const publicAccessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+  const publicSubject = process.env.NEXT_PUBLIC_WEB3FORMS_SUBJECT || 'New Black Ridge Inquiry';
+
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitMessage, setSubmitMessage] = React.useState('');
+  const [submitError, setSubmitError] = React.useState(false);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage('');
+    setSubmitError(false);
+
+    const form = event.currentTarget;
+
+    if (!publicAccessKey) {
+      setSubmitError(true);
+      setSubmitMessage('Missing NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY in environment.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    const formData = new FormData(form);
+    formData.append('access_key', publicAccessKey);
+    formData.append('subject', publicSubject);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const rawBody = await response.text();
+      let result: { success?: boolean; message?: string } = {};
+
+      try {
+        result = JSON.parse(rawBody);
+      } catch {
+        result = { message: rawBody || 'Invalid response from form service.' };
+      }
+
+      if (response.ok && result.success) {
+        setSubmitMessage('Inquiry sent successfully. We will get back within 24 hours.');
+        form.reset();
+      } else {
+        setSubmitError(true);
+        setSubmitMessage(result?.message || 'Unable to send inquiry right now. Please try again.');
+      }
+    } catch {
+      setSubmitError(true);
+      setSubmitMessage('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="bg-bg py-32 px-6 relative z-10">
       <div className="max-w-7xl mx-auto">
@@ -46,7 +102,7 @@ export const Contact = () => {
               </div>
 
               {/* Form */}
-              <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-8" onSubmit={handleSubmit}>
 
                 {/* Name */}
                 <div className="space-y-1">
@@ -55,8 +111,10 @@ export const Contact = () => {
                   </p>
                   <input
                     type="text"
+                    name="name"
                     placeholder="Your name or company"
                     className="input-industrial"
+                    required
                   />
                 </div>
 
@@ -67,8 +125,10 @@ export const Contact = () => {
                   </p>
                   <input
                     type="email"
+                    name="email"
                     placeholder="you@example.com"
                     className="input-industrial"
+                    required
                   />
                 </div>
 
@@ -79,6 +139,7 @@ export const Contact = () => {
                   </p>
                   <input
                     type="text"
+                    name="project_type"
                     placeholder="e.g. Website, AI System, etc."
                     className="input-industrial"
                   />
@@ -90,16 +151,28 @@ export const Contact = () => {
                     Project Details
                   </p>
                   <textarea
+                    name="message"
                     placeholder="Tell us about your project..."
                     className="input-industrial min-h-[100px] resize-none"
+                    required
                   />
                 </div>
 
                 {/* Button */}
-                <button className="btn-os w-full justify-center group">
-                  Send Inquiry
+                <button className="btn-os w-full justify-center group" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Send Inquiry'}
                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </button>
+
+                {submitMessage && (
+                  <p
+                    className={`text-xs text-center mono uppercase tracking-widest ${
+                      submitError ? 'text-red-400' : 'text-green-400'
+                    }`}
+                  >
+                    {submitMessage}
+                  </p>
+                )}
 
                 {/* Trust line */}
                 <p className="text-[10px] text-foreground/40 text-center mono uppercase tracking-widest">

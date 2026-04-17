@@ -41,7 +41,7 @@ export default function AdminBlogPage() {
       title: "New Post",
       excerpt: "Short excerpt for the post...",
       date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase(),
-      author: "auraV4_Admin",
+      author: "blackridge_Admin",
       category: "GENERAL",
       content: ""
     };

@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import DeviceShowcase from './DeviceShowcase';
 
-// DeviceShowcase is used instead of AuraTerminal
+// DeviceShowcase is used instead of BlackRidgeTerminal
 
 export const Hero = () => {
   const containerRef = useRef<HTMLElement>(null);

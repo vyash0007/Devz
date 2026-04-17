@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Terminal, ArrowRight, Sun, Moon, X, Menu } from 'lucide-react';
+import { ArrowRight, Sun, Moon, X, Menu } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from 'next-themes';
@@ -16,11 +17,18 @@ export default function Navbar() {
 
   useEffect(() => {
     setMounted(true);
+    const timeFormatter = new Intl.DateTimeFormat(undefined, {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    });
+
     const updateTime = () => {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+      const timeStr = timeFormatter.format(new Date());
       setTime(`${timeStr}_LOCAL`);
     };
+
     updateTime();
     const timer = setInterval(updateTime, 1000);
     return () => clearInterval(timer);
@@ -33,15 +41,32 @@ export default function Navbar() {
     { label: 'Contact', href: '/contact' },
   ];
 
+  const brandWordmarkStyles = {
+    minimal: 'mono text-sm md:text-base font-medium tracking-[0.14em] uppercase text-foreground/85',
+    premium: 'text-sm md:text-base font-semibold tracking-[0.1em] uppercase text-foreground/90',
+    bold: 'mono text-base md:text-lg font-bold tracking-[0.08em] uppercase text-foreground',
+  } as const;
+
+  const activeBrandWordmarkStyle: keyof typeof brandWordmarkStyles = 'premium';
+
   return (
     <>
       <nav className="fixed top-0 w-full z-[100] px-6 py-4 md:px-12 flex justify-between items-center border-b border-border bg-bg/70 backdrop-blur-xl">
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-foreground flex items-center justify-center shrink-0">
-              <Terminal size={18} className="text-bg" />
+            <div className="relative w-16 h-8 overflow-hidden">
+              <Image
+                src="/logo.png"
+                alt="Black Ridge logo"
+                fill
+                sizes="64px"
+                priority
+                className="object-cover object-center scale-[2.8]"
+              />
             </div>
-            <span className="mono font-medium tracking-tighter text-xl uppercase text-foreground">Aura_v4</span>
+            <span className={`${brandWordmarkStyles[activeBrandWordmarkStyle]} group-hover:text-foreground transition-colors`}>
+              BLACKRIDGE
+            </span>
           </Link>
 
           <div className="hidden lg:flex gap-8 mono text-[10px] tracking-[0.2em] uppercase font-medium text-foreground/40">
@@ -49,11 +74,10 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`transition-colors ${
-                  pathname === link.href 
-                    ? 'text-blue-400 opacity-100' 
-                    : 'hover:text-foreground/80'
-                }`}
+                className={`transition-colors ${pathname === link.href
+                  ? 'text-blue-400 opacity-100'
+                  : 'hover:text-foreground/80'
+                  }`}
               >
                 {link.label}
               </Link>

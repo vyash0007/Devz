@@ -44,7 +44,7 @@ const useTerminalSequence = (lines: { text: string; delay?: number; highlight?: 
 };
 
 export const Terminal = () => {
-  const commandLine = "aura build --target production --optimize alpha";
+  const commandLine = "blackridge build --target production --optimize alpha";
   const logLines = [
     { text: "parsing configuration...", delay: 400 },
     { text: "optimizing dependency graph...", delay: 600 },
@@ -78,7 +78,7 @@ export const Terminal = () => {
             <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/30" />
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-[9px] uppercase tracking-widest text-text-muted font-mono">AURA_TERMINAL_V4.2</span>
+            <span className="text-[9px] uppercase tracking-widest text-text-muted font-mono">BLACKRIDGE_SHELL_V1.0</span>
             <Settings2 size={10} className="text-text-muted animate-spin-slow" />
           </div>
           <div className="w-10" />

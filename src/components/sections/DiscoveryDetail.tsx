@@ -30,7 +30,7 @@ export const DiscoveryDetail = () => {
       <div className="relative flex items-center justify-center lg:justify-end pt-10 lg:pt-0 w-full h-full min-h-[400px]">
         <div className="relative w-full max-w-[600px] aspect-[4/5] drop-shadow-2xl">
           <Image
-            src="/aura_mockups_final.png"
+            src="/image1.png"
             fill
             alt="Aura Systems Mockups"
             className="object-contain lg:object-right"

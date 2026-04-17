@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center pt-20 border-t border-border mono text-[10px] text-foreground/30 tracking-widest uppercase">
 
           {/* Left */}
-          <p>© 2026 auraV4. All rights reserved.</p>
+          <p>© 2026 BlackRidge. All rights reserved.</p>
 
           {/* Center */}
           <p>Systems built to scale.</p>

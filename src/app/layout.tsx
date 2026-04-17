@@ -16,15 +16,20 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aura Systems — Engineering Future-Proof Infra",
+  title: "BlackRidge — Engineering Future-Proof Infra",
   description:
     "We build the systems that the world's most ambitious companies run on. Zero lag. Infinite scale. Total control.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
   keywords: [
     "infrastructure engineering",
     "distributed systems",
     "software development",
     "performance optimization",
-    "Aura Systems",
+    "BlackRidge",
   ],
 };
 

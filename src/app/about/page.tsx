@@ -15,7 +15,7 @@ export default function AboutPage() {
         <section className="px-6 pb-32">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
-            <div className="max-w-4xl mb-32">
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start mb-32">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -28,39 +28,12 @@ export default function AboutPage() {
                   WE BUILD <br /> <span className="text-blue-400 italic">SYSTEMS</span> <br /> OF POWER.
                 </h1>
                 <p className="text-xl md:text-3xl text-foreground/60 font-light leading-relaxed max-w-2xl">
-                  auraV4 is a specialized engineering collective focused on 
+                  BlackRidge is a specialized engineering collective focused on 
                   building the high-performance infrastructure that 
                   powers high-convexity teams.
                 </p>
               </motion.div>
-            </div>
-
-            {/* Content Grid */}
-            <div className="grid md:grid-cols-2 gap-20 items-start mb-40">
-              <div className="space-y-12">
-                <div>
-                  <h2 className="text-3xl font-medium uppercase tracking-tighter mb-6">Our DNA</h2>
-                  <p className="text-foreground/50 text-lg leading-relaxed">
-                    We don't believe in generic solutions. Every line of code is 
-                    engineered for a specific outcome. We prioritize speed, 
-                    security, and scalability above all else. Our approach is 
-                    founded on the principles of distributed systems and 
-                    low-latency performance.
-                  </p>
-                </div>
-                <div>
-                  <h2 className="text-3xl font-medium uppercase tracking-tighter mb-6">Execution</h2>
-                  <p className="text-foreground/50 text-lg leading-relaxed">
-                    Based in India and operating globally, we bridge the gap 
-                    between complex technical requirements and stunning 
-                    user interfaces. Our team consists of engineers, 
-                    designers, and problem solvers who thrive on 
-                    "impossible" challenges.
-                  </p>
-                </div>
-              </div>
-
-              <div className="card-border p-10 bg-surface/50 border-blue-500/10">
+              <div className="card-border p-10 bg-surface/50 border-blue-500/10 lg:mt-10">
                 <div className="mono text-[10px] text-foreground/30 uppercase tracking-[0.2em] mb-10">
                   SYSTEM_CAPABILITIES_REPORT / 2026
                 </div>
@@ -78,6 +51,32 @@ export default function AboutPage() {
                   ))}
                 </div>
               </div>
+            </div>
+
+            {/* Content Grid */}
+            <div className="grid md:grid-cols-2 gap-20 items-start mb-40">
+              <div>
+                <h2 className="text-3xl font-medium uppercase tracking-tighter mb-6">Our DNA</h2>
+                <p className="text-foreground/50 text-lg leading-relaxed">
+                  We don't believe in generic solutions. Every line of code is 
+                  engineered for a specific outcome. We prioritize speed, 
+                  security, and scalability above all else. Our approach is 
+                  founded on the principles of distributed systems and 
+                  low-latency performance.
+                </p>
+              </div>
+              <div>
+                <h2 className="text-3xl font-medium uppercase tracking-tighter mb-6">Execution</h2>
+                <p className="text-foreground/50 text-lg leading-relaxed">
+                  Based in India and operating globally, we bridge the gap 
+                  between complex technical requirements and stunning 
+                  user interfaces. Our team consists of engineers, 
+                  designers, and problem solvers who thrive on 
+                  "impossible" challenges.
+                </p>
+              </div>
+
+              
             </div>
 
             {/* Principles Section */}

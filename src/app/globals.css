@@ -184,7 +184,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  clip-path: polygon(0 0, 100% 0, 100% 75%, 92% 100%, 0 100%);
+  clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
   transition: all 0.2s;
 }
 
