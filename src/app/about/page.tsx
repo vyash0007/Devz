@@ -10,7 +10,7 @@ export default function AboutPage() {
     <div className="bg-bg text-foreground selection:bg-blue-500/30 w-full overflow-hidden relative min-h-screen">
       <div className="noise" />
       <Navbar />
-      
+
       <main className="pt-40">
         <section className="px-6 pb-32">
           <div className="max-w-7xl mx-auto">
@@ -28,12 +28,12 @@ export default function AboutPage() {
                   WE BUILD <br /> <span className="text-blue-400 italic">SYSTEMS</span> <br /> OF POWER.
                 </h1>
                 <p className="text-xl md:text-3xl text-foreground/60 font-light leading-relaxed max-w-2xl">
-                  BlackRidge is a specialized engineering collective focused on 
-                  building the high-performance infrastructure that 
+                  BlackRidge is a specialized engineering collective focused on
+                  building the high-performance infrastructure that
                   powers high-convexity teams.
                 </p>
               </motion.div>
-              <div className="card-border p-10 bg-surface/50 border-blue-500/10 lg:mt-10">
+              <div className="card-border p-10 bg-surface/50 border-blue-500/10 ml-5 lg:mt-30">
                 <div className="mono text-[10px] text-foreground/30 uppercase tracking-[0.2em] mb-10">
                   SYSTEM_CAPABILITIES_REPORT / 2026
                 </div>
@@ -58,25 +58,25 @@ export default function AboutPage() {
               <div>
                 <h2 className="text-3xl font-medium uppercase tracking-tighter mb-6">Our DNA</h2>
                 <p className="text-foreground/50 text-lg leading-relaxed">
-                  We don't believe in generic solutions. Every line of code is 
-                  engineered for a specific outcome. We prioritize speed, 
-                  security, and scalability above all else. Our approach is 
-                  founded on the principles of distributed systems and 
+                  We don't believe in generic solutions. Every line of code is
+                  engineered for a specific outcome. We prioritize speed,
+                  security, and scalability above all else. Our approach is
+                  founded on the principles of distributed systems and
                   low-latency performance.
                 </p>
               </div>
               <div>
                 <h2 className="text-3xl font-medium uppercase tracking-tighter mb-6">Execution</h2>
                 <p className="text-foreground/50 text-lg leading-relaxed">
-                  Based in India and operating globally, we bridge the gap 
-                  between complex technical requirements and stunning 
-                  user interfaces. Our team consists of engineers, 
-                  designers, and problem solvers who thrive on 
+                  Based in India and operating globally, we bridge the gap
+                  between complex technical requirements and stunning
+                  user interfaces. Our team consists of engineers,
+                  designers, and problem solvers who thrive on
                   "impossible" challenges.
                 </p>
               </div>
 
-              
+
             </div>
 
             {/* Principles Section */}
