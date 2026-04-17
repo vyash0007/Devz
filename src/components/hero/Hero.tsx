@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import DeviceShowcase from './DeviceShowcase';
 
 // DeviceShowcase is used instead of BlackRidgeTerminal
@@ -39,10 +40,17 @@ export const Hero = () => {
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <button className="btn-primary w-full sm:w-auto">Initiate Sprint</button>
-              <button className="mono text-[10px] font-medium tracking-widest uppercase border border-border px-8 py-4 hover:bg-foreground hover:text-bg transition-all w-full sm:w-auto text-center">
+              <Link 
+                href="https://cal.com/black-ridge" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-primary w-full sm:w-auto text-center"
+              >
+                Initiate Sprint
+              </Link>
+              <Link href="/about" className="mono text-[10px] font-medium tracking-widest uppercase border border-border px-8 py-4 hover:bg-foreground hover:text-bg transition-all w-full sm:w-auto text-center">
                 Learn More
-              </button>
+              </Link>
             </div>
           </div>
 

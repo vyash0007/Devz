@@ -15,6 +15,10 @@
   --color-text-muted: var(--text-muted);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --bg: #ffffff;
   --surface-low: #f8f9fa;

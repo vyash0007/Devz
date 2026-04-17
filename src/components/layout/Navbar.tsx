@@ -48,15 +48,42 @@ export default function Navbar() {
   } as const;
 
   const activeBrandWordmarkStyle: keyof typeof brandWordmarkStyles = 'premium';
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const href = e.currentTarget.getAttribute('href');
+    if (href?.startsWith('/#')) {
+      e.preventDefault();
+      setIsMenuOpen(false);
+      const targetId = href.replace('/#', '');
+      const elem = document.getElementById(targetId);
+      if (elem) {
+        elem.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      } else {
+        // Fallback for different pages
+        window.location.href = href;
+      }
+    }
+  };
 
   return (
     <>
       <nav className="fixed top-0 w-full z-[100] px-6 py-4 md:px-12 flex justify-between items-center border-b border-border bg-bg/70 backdrop-blur-xl">
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-0 group">
+          <Link
+            href="/"
+            onClick={(e) => {
+              if (pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+            className="flex items-center gap-0 group"
+          >
             <div className="relative w-28 h-10 md:w-32 md:h-11 overflow-hidden -mr-9 md:-mr-8 [clip-path:inset(0_38%_0_0)] md:[clip-path:inset(0_34%_0_0)]">
               <Image
-                src="/logo1.png"
+                src={mounted && resolvedTheme === 'light' ? "/logo2.png" : "/logo1.png"}
                 alt="Black Ridge logo"
                 fill
                 sizes="(max-width: 768px) 112px, 128px"
@@ -100,10 +127,14 @@ export default function Navbar() {
             {mounted && (resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />)}
           </button>
 
-          <button className="hidden sm:inline-flex btn-os text-[10px] py-2 px-6">
+          <Link
+            href="/#contact"
+            onClick={handleScroll}
+            className="hidden sm:inline-flex btn-os text-[10px] py-2 px-6"
+          >
             Discuss Project
             <ArrowRight size={14} />
-          </button>
+          </Link>
 
           <button
             className="lg:hidden p-2 text-foreground/60 hover:text-foreground transition-colors"
@@ -151,10 +182,14 @@ export default function Navbar() {
                     {mounted && (resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />)}
                   </button>
                 </div>
-                <button className="btn-os w-full justify-center text-xs py-3">
+                <Link
+                  href="/#contact"
+                  onClick={handleScroll}
+                  className="btn-os w-full justify-center text-xs py-3"
+                >
                   Connect_Cluster
                   <ArrowRight size={16} />
-                </button>
+                </Link>
               </div>
             </div>
           </motion.div>
