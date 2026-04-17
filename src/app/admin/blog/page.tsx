@@ -11,6 +11,7 @@ import { Modal } from '@/components/ui/Modal';
 export default function AdminBlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const [password, setPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loginError, setLoginError] = useState(false);
@@ -26,7 +27,17 @@ export default function AdminBlogPage() {
     fetch('/api/blog')
       .then(res => res.json())
       .then(data => {
-        setPosts(data);
+        if (Array.isArray(data)) {
+          setPosts(data);
+        } else {
+          console.error('Data fetched is not an array:', data);
+          setPosts([]);
+        }
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Fetch error:', err);
+        setPosts([]);
         setLoading(false);
       });
   }, []);
@@ -61,30 +72,49 @@ export default function AdminBlogPage() {
   };
 
   const handleSave = async () => {
-    const res = await fetch('/api/blog', {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': password 
-      },
-      body: JSON.stringify(posts)
-    });
-    if (res.ok) {
-      setModal({
-        isOpen: true,
-        title: 'Commit Successful',
-        message: 'COMM_LINK_SECURED: All changes have been successfully committed to the project core.',
-        type: 'alert',
-        onConfirm: () => {}
+    setIsSaving(true);
+    try {
+      const res = await fetch('/api/blog', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': password 
+        },
+        body: JSON.stringify(posts)
       });
-    } else {
+
+      if (res.ok) {
+        setModal({
+          isOpen: true,
+          title: 'Commit Successful',
+          message: 'COMM_LINK_SECURED: All changes have been successfully committed to the project core.',
+          type: 'alert',
+          onConfirm: () => {}
+        });
+      } else {
+        const errorData = await res.json().catch(() => ({}));
+        const isAuthError = res.status === 401;
+        
+        setModal({
+          isOpen: true,
+          title: isAuthError ? 'Access Denied' : 'System Failure',
+          message: isAuthError 
+            ? 'ERROR: Invalid authorization key or restricted access. Verify your credentials.' 
+            : `ERROR: ${errorData.error || 'Failed to save data to core archives'}. Check server logs.`,
+          type: 'error',
+          onConfirm: () => {}
+        });
+      }
+    } catch (err: any) {
       setModal({
         isOpen: true,
-        title: 'Access Denied',
-        message: 'ERROR: Invalid authorization key or restricted access. Verify your credentials.',
+        title: 'Network Error',
+        message: `ERROR: Failed to reach the system core. ${err.message}`,
         type: 'error',
         onConfirm: () => {}
       });
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -148,8 +178,21 @@ export default function AdminBlogPage() {
               <button onClick={handleAddPost} className="btn-os bg-blue-500/10 border border-blue-500/20 text-blue-400 hover:bg-blue-400 hover:text-white px-6">
                 <Plus size={16} /> New_Entry
               </button>
-              <button onClick={handleSave} className="btn-os bg-foreground text-bg px-8">
-                <Save size={16} /> Commit_Changes
+              <button 
+                onClick={handleSave} 
+                disabled={isSaving}
+                className={`btn-os bg-foreground text-bg px-8 ${isSaving ? 'opacity-50 cursor-wait' : ''}`}
+              >
+                {isSaving ? (
+                  <>
+                    <div className="w-3 h-3 border-2 border-bg border-t-transparent animate-spin rounded-full" />
+                    Committing...
+                  </>
+                ) : (
+                  <>
+                    <Save size={16} /> Commit_Changes
+                  </>
+                )}
               </button>
             </div>
           </div>
