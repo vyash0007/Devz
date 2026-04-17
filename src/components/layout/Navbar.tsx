@@ -53,18 +53,19 @@ export default function Navbar() {
     <>
       <nav className="fixed top-0 w-full z-[100] px-6 py-4 md:px-12 flex justify-between items-center border-b border-border bg-bg/70 backdrop-blur-xl">
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative w-16 h-8 overflow-hidden">
+          <Link href="/" className="flex items-center gap-0 group">
+            <div className="relative w-28 h-10 md:w-32 md:h-11 overflow-hidden -mr-9 md:-mr-8 [clip-path:inset(0_38%_0_0)] md:[clip-path:inset(0_34%_0_0)]">
               <Image
-                src="/logo.png"
+                src="/logo1.png"
                 alt="Black Ridge logo"
                 fill
-                sizes="64px"
+                sizes="(max-width: 768px) 112px, 128px"
                 priority
-                className="object-cover object-center scale-[2.8]"
+                quality={100}
+                className="object-contain object-left origin-left scale-[1.55] md:scale-[1.5]"
               />
             </div>
-            <span className={`${brandWordmarkStyles[activeBrandWordmarkStyle]} group-hover:text-foreground transition-colors`}>
+            <span className={`-ml-2.5 md:-ml-3 ${brandWordmarkStyles[activeBrandWordmarkStyle]} group-hover:text-foreground transition-colors`}>
               BLACKRIDGE
             </span>
           </Link>
