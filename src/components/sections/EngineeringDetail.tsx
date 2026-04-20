@@ -107,7 +107,7 @@ export const EngineeringDetail = () => {
         </p>
       </div>
 
-      <div className="relative rounded-md border border-dotted border-foreground/30 bg-bg/80 px-4 py-8 md:px-8 md:py-10">
+      <div className="relative rounded-md border border-dotted border-foreground/30 bg-bg/80 px-4 py-8 md:rounded-none md:border-0 md:px-8 md:py-10">
         <div className="flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
