@@ -22,10 +22,10 @@ export const Process = () => {
             <div key={step.title} className="group">
               <div className="relative flex items-center justify-between border-b border-border/90 py-6 md:py-8 gap-4">
                 <div className="relative flex items-center gap-4 md:gap-10 overflow-hidden">
-                  <span className="mono shrink-0 rounded-sm border border-white/10 bg-white/[0.02] px-2.5 py-1 text-sm md:text-base font-medium tracking-[0.18em] text-foreground/55 transition-colors duration-300 group-hover:text-foreground/80">
+                  <span className="mono shrink-0 rounded-sm border border-white/10 bg-white/[0.02] px-2.5 py-1 text-sm md:text-base font-medium tracking-[0.18em] text-foreground/55">
                     0{i + 1}
                   </span>
-                  <h3 className="truncate text-2xl sm:text-4xl md:text-7xl font-light uppercase tracking-[-0.03em] text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-400 to-sky-300 transition-all duration-300 group-hover:from-blue-300 group-hover:via-blue-200 group-hover:to-cyan-200">
+                  <h3 className="truncate text-2xl sm:text-4xl md:text-7xl font-light uppercase tracking-[-0.03em] text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-400 to-sky-300">
                     {step.title}
                   </h3>
                 </div>
