@@ -22,7 +22,7 @@ export const Process = () => {
         <div className="space-y-0">
           {steps.map((step, i) => (
             <div key={step.title} className="group">
-              <div className="relative flex items-center justify-between border-b border-border/90 py-6 md:py-8 gap-4">
+              <div className="relative flex items-center justify-between border-b border-border/90 dark:border-white/15 py-6 md:py-8 gap-4">
                 <div className="relative flex items-center gap-4 md:gap-10 overflow-hidden">
                   <span className="mono shrink-0 rounded-sm border border-white/10 bg-white/[0.02] px-2.5 py-1 text-sm md:text-base font-medium tracking-[0.18em] text-foreground/55">
                     0{i + 1}

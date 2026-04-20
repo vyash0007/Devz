@@ -27,7 +27,7 @@ const expertise = [
 
 export const ExperienceSpotlight = () => {
 	return (
-		<div className="mt-8 md:mt-10 text-foreground rounded-xl overflow-hidden border border-border bg-surface/35 backdrop-blur-sm">
+		<div className="mt-8 md:mt-10 text-foreground rounded-xl overflow-hidden border border-[var(--experience-border)] bg-surface/35 backdrop-blur-sm">
 			<div className="bg-gradient-to-b from-bg via-surface-low/80 to-surface/60 pt-12 pb-6 md:pt-16 md:pb-10 text-foreground">
 				<div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-start">
 					<div className="col-span-1 lg:col-span-2">
@@ -58,7 +58,7 @@ export const ExperienceSpotlight = () => {
 
 				<div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-12">
 					<div
-						className="w-full h-[280px] sm:h-[400px] md:h-[520px] lg:h-[620px] relative overflow-hidden bg-surface-high border border-border"
+						className="w-full h-[280px] sm:h-[400px] md:h-[520px] lg:h-[620px] relative overflow-hidden bg-surface-high border border-[var(--experience-border)]"
 						style={{ clipPath: 'polygon(0 0, calc(100% - 60px) 0, 100% 60px, 100% 100%, 0 100%)' }}
 					>
 						<Image
@@ -96,7 +96,7 @@ export const ExperienceSpotlight = () => {
 					</div>
 
 					<div className="flex items-center justify-center lg:justify-end">
-						<div className="bg-surface-high w-full max-w-[600px] p-8 md:p-12 relative text-foreground border border-border shadow-[0_18px_46px_-30px_rgba(15,111,255,0.35)]">
+						<div className="bg-surface-high w-full max-w-[600px] p-8 md:p-12 relative text-foreground border border-[var(--experience-border)] shadow-[0_18px_46px_-30px_rgba(15,111,255,0.35)]">
 							<div
 								className="absolute top-0 right-0 w-[50px] h-[50px] bg-blue-500/85"
 								style={{ clipPath: 'polygon(100% 0, 0 0, 100% 100%)' }}
@@ -111,7 +111,7 @@ export const ExperienceSpotlight = () => {
 								<span className="text-foreground/55">working on your business.</span>
 							</p>
 
-							<div className="flex flex-row items-end justify-between border-t border-border pt-7 mt-auto gap-4">
+							<div className="flex flex-row items-end justify-between border-t border-[var(--experience-divider)] pt-7 mt-auto gap-4">
 								{/* <div className="flex items-center gap-4 min-w-0">
 									<Image
 										src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"

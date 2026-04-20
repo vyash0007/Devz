@@ -43,6 +43,8 @@ html {
   --bg-gradient-bottom: #eaf1fb;
   --flare-blend-mode: multiply;
   --noise-opacity: 0.016;
+  --experience-border: rgba(80, 108, 140, 0.5);
+  --experience-divider: rgba(80, 108, 140, 0.56);
 }
 
 .dark {
@@ -66,6 +68,8 @@ html {
   --bg-gradient-bottom: #030303;
   --flare-blend-mode: screen;
   --noise-opacity: 0.028;
+  --experience-border: rgba(255, 255, 255, 0.34);
+  --experience-divider: rgba(255, 255, 255, 0.4);
 }
 
 body {
@@ -289,7 +293,7 @@ body {
 
 .card-border {
   position: relative;
-  background: var(--grid-line);
+  background-color: var(--grid-line);
   border: 1px solid var(--border);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
