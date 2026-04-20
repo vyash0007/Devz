@@ -53,20 +53,20 @@ const items: CatalogItem[] = [
 
 const CardContent = () => {
   return (
-    <div className="w-full rounded-[26px] border border-black/10 bg-white/92 px-4 py-5 shadow-[0_22px_60px_-48px_rgba(12,32,61,0.45)] dark:border-white/10 dark:bg-[#0d131c]/92 sm:px-8 sm:py-7">
+    <div className="w-full rounded-[26px] border border-border bg-surface px-4 py-5 shadow-[0_22px_60px_-48px_rgba(12,32,61,0.45)] sm:px-8 sm:py-7">
       <div className="mb-5 flex items-center gap-3 sm:mb-6">
         <h3 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">Monthly Subscription</h3>
-        <span className="rounded-full border border-black/10 bg-black/[0.04] px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wide text-foreground/55 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/70">
+        <span className="rounded-full border border-border bg-foreground/5 px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wide text-foreground/60 dark:text-white/40">
           4 Items
         </span>
       </div>
 
       <div className="mb-6 flex flex-wrap gap-2.5 sm:mb-7">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/35 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-emerald-600 dark:text-emerald-400">
           <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
           Paid
         </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/35 bg-amber-500/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400">
           <Circle className="h-3.5 w-3.5" strokeWidth={2.5} />
           Fulfillment Pending
         </span>
@@ -190,7 +190,7 @@ const IntegrationsAutomationCard = () => {
         </p>
       </div>
 
-      <div className="mt-12 select-none sm:mt-14 relative rounded-[26px] border border-black/10 bg-white/92 px-4 py-5 shadow-[0_22px_60px_-48px_rgba(12,32,61,0.45)] dark:border-white/10 dark:bg-[#0d131c]/92 sm:px-8 sm:py-7">
+      <div className="mt-12 select-none sm:mt-14 relative rounded-[26px] border border-border bg-surface px-4 py-5 shadow-[0_22px_60px_-48px_rgba(12,32,61,0.45)] sm:px-8 sm:py-7">
         <style>{`
         .integration-line-base {
           stroke-dasharray: 800;
@@ -209,7 +209,7 @@ const IntegrationsAutomationCard = () => {
         }
 
         .integration-mounted .integration-flow-line {
-          opacity: 0.45;
+          opacity: 1;
           animation: integrationFlowData 0.6s linear infinite;
         }
 
@@ -277,19 +277,19 @@ const IntegrationsAutomationCard = () => {
                 <path
                   d={path}
                   fill="none"
-                  stroke="rgba(148,163,184,0.4)"
-                  strokeWidth="2.5"
+                  stroke="rgba(0, 0, 0, 0.6)"
+                  strokeWidth="3"
                   strokeLinecap="round"
-                  className="integration-line-base"
+                  className="integration-line-base dark:stroke-white/10"
                   style={{ animationDelay: `${i * 0.08}s` }}
                 />
                 <path
                   d={path}
                   fill="none"
-                  stroke="rgba(148,163,184,0.75)"
-                  strokeWidth="2"
+                  stroke="rgba(37, 99, 235, 1)"
+                  strokeWidth="4"
                   strokeLinecap="round"
-                  className="integration-flow-line"
+                  className="integration-flow-line dark:stroke-blue-400/50"
                 />
               </g>
             );
@@ -298,11 +298,11 @@ const IntegrationsAutomationCard = () => {
           <g transform={`translate(${centerX}, ${centerY})`}>
             <g className="integration-center-hub" style={{ transformOrigin: '0px 0px' }}>
               <circle r="100" fill="white" filter="url(#integration-center-glow)" opacity="0.15" />
-              <circle r="80" fill="white" className="dark:fill-[#1e293b]" filter="url(#integration-node-shadow)" />
+              <circle r="80" fill="var(--surface)" filter="url(#integration-node-shadow)" />
               <foreignObject x="-80" y="-80" width="160" height="160">
-                <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full border-[3px] border-white dark:border-[#1e293b]">
-                  <img src="/logo2.png" alt="Light Mode Logo" className="h-full w-full object-cover dark:hidden bg-white" />
-                  <img src="/logo1.png" alt="Dark Mode Logo" className="hidden h-full w-full object-cover dark:block bg-[#1e293b]" />
+                <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full border-[3px] border-border bg-white shadow-sm">
+                  <img src="/logo1.png" alt="Light Mode logo" className="h-full w-full object-contain dark:hidden p-4" />
+                  <img src="/logo2.png" alt="Dark Mode logo" className="hidden h-full w-full object-contain dark:block p-4" />
                 </div>
               </foreignObject>
             </g>
@@ -333,15 +333,15 @@ export const BentoGrid = () => {
   const lensRef = useRef<HTMLDivElement | null>(null);
   const magnifiedContentRef = useRef<HTMLDivElement | null>(null);
 
-  const lensSize = 250;
-  const scale = 1.33;
+  const lensSize = 200;
+  const scale = 2.0;
 
   const lensStyle = useMemo(
     () => ({
       width: lensSize,
       height: lensSize,
-      boxShadow: '0 22px 60px -30px rgba(15,111,255,0.75), inset 0 0 0 1px rgba(255,255,255,0.65)',
-      backgroundColor: 'var(--bg)'
+      boxShadow: '0 22px 60px -30px rgba(15,111,255,0.5), inset 0 0 0 1px var(--border)',
+      backgroundColor: 'var(--surface)'
     }),
     [lensSize]
   );
@@ -366,22 +366,29 @@ export const BentoGrid = () => {
         const rect = containerRef.current.getBoundingClientRect();
         
         if (rect.width > 0 && rect.height > 0) {
-          // Keep X fixed at roughly the middle-right (e.g., 60% of width)
-          const x = rect.width * 0.6;
-          
-          // Y moves from 20% to 80% of height
+          // x is fixed; y oscillates within the card
+          const x = rect.width * 0.45;
           const yMin = rect.height * 0.2;
           const yMax = rect.height * 0.8;
           const y = yMin + wave * (yMax - yMin);
 
-          lensRef.current.style.left = `${x - lensSize / 2}px`;
-          lensRef.current.style.top = `${y - lensSize / 2}px`;
+          // Position lens so its center sits at (x, y) in the container
+          const lensLeft = x - lensSize / 2;
+          const lensTop  = y - lensSize / 2;
+          lensRef.current.style.left = `${lensLeft}px`;
+          lensRef.current.style.top  = `${lensTop}px`;
 
-          const contentX = lensSize / 2 - x * scale;
-          const contentY = lensSize / 2 - y * scale;
-
-          magnifiedContentRef.current.style.left = `${contentX}px`;
-          magnifiedContentRef.current.style.top = `${contentY}px`;
+          // Inside the lens the origin is at (lensLeft, lensTop) relative to the container.
+          // Shift the duplicate card by (-lensLeft, -lensTop) so that it is perfectly
+          // co-located with the real card as if they shared the same coordinate space.
+          // Then scale around the zoom target point (x, y) in the duplicate's own space,
+          // which after the offset equals (x - lensLeft, y - lensTop) = (lensSize/2, lensSize/2).
+          magnifiedContentRef.current.style.width = `${rect.width}px`;
+          magnifiedContentRef.current.style.left  = `${-lensLeft}px`;
+          magnifiedContentRef.current.style.top   = `${-lensTop}px`;
+          // transform-origin uses coordinates in the element's own (pre-transform) space
+          magnifiedContentRef.current.style.transformOrigin = `${x - lensLeft}px ${y - lensTop}px`;
+          magnifiedContentRef.current.style.transform = `scale(${scale})`;
         }
       }
 
@@ -398,7 +405,7 @@ export const BentoGrid = () => {
   }, [lensSize, scale]);
 
   return (
-    <section id="core" className="relative z-10 px-6 py-20 md:py-24">
+    <section id="core" className="hidden lg:block relative z-10 px-6 py-20 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
         <div className="w-full lg:w-1/3">
@@ -421,13 +428,13 @@ export const BentoGrid = () => {
 
             <div
               ref={lensRef}
-              className="pointer-events-none absolute left-[18%] top-[76%] hidden -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full border border-border/90 opacity-100 transition-opacity duration-200 lg:block"
+              className="pointer-events-none absolute overflow-hidden rounded-full border border-border/90 opacity-100 hidden lg:block"
               style={lensStyle}
             >
               <div
                 ref={magnifiedContentRef}
-                className="absolute left-0 top-0 w-full origin-top-left"
-                style={{ transform: `scale(${scale})` }}
+                className="absolute"
+                style={{}}
               >
                 <CardContent />
               </div>
