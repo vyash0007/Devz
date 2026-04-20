@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { DiscoveryDetail } from '@/components/sections/DiscoveryDetail';
+import { ExperienceSpotlight } from '@/components/sections/ExperienceSpotlight';
 import { ProjectsDetail } from '@/components/sections/ProjectsDetail';
 import { EngineeringDetail } from '@/components/sections/EngineeringDetail';
 import { FaqDetail } from '@/components/sections/FaqDetail';
@@ -11,6 +12,7 @@ export const Process = () => {
     { title: "Engineering", content: <EngineeringDetail />, accent: "from-sky-500/20 via-blue-500/15 to-cyan-300/10" },
     { title: "Our Projects", content: <ProjectsDetail />, accent: "from-indigo-500/20 via-blue-500/15 to-sky-400/10" },
     { title: "Discovery", content: <DiscoveryDetail />, accent: "from-blue-500/25 via-blue-400/15 to-cyan-400/10" },
+    { title: "Experience", content: <ExperienceSpotlight />, accent: "from-amber-200/15 via-zinc-200/10 to-white/5" },
     { title: "FAQs", content: <FaqDetail />, accent: "from-cyan-500/20 via-blue-500/15 to-blue-300/10" },
   ];
 
