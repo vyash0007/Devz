@@ -10,10 +10,10 @@ export const DiscoveryDetail = () => {
     <div className="grid lg:grid-cols-2 gap-10 md:gap-14 items-start">
       {/* Left Column: Content */}
       <div className="space-y-6 lg:pt-16 xl:pt-20">
-        <div className="space-y-6">
-          <h2 className="text-4xl md:text-6xl font-light tracking-tighter uppercase leading-[0.95]">
+        <div className="space-y-8">
+          <h4 className="text-2xl md:text-4xl font-light tracking-tighter uppercase leading-[0.95]">
             HIGH-PERFORMANCE <span className="text-blue-400 italic">SYSTEMS</span>
-          </h2>
+          </h4>
           <p className="text-xl md:text-2xl text-foreground/50 leading-relaxed font-light max-w-xl">
             We design and build high-performance web platforms,
             AI-powered systems, and scalable digital products.
