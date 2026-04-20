@@ -95,9 +95,9 @@ export const EngineeringDetail = () => {
   return (
     <div className="py-10 md:py-14">
       <div className="max-w-4xl mb-10 md:mb-12 space-y-6">
-        <h2 className="text-4xl md:text-5xl lg:text-7xl font-medium tracking-tighter leading-[0.95]">
+        <h2 className="text-4xl md:text-5xl lg:text-7xl font-light tracking-tighter leading-[0.95]">
           BUILT ON MODERN
-          <br /> <span className="text-blue-400 italic"> TECHNOLOGY STACKS</span>
+          <br /> <span className="text-blue-400 italic font-light"> TECHNOLOGY STACKS</span>
         </h2>
         <p className="text-lg md:text-xl text-foreground/70 font-light leading-relaxed max-w-3xl">
           We use production-grade tools and frameworks to build systems that are fast,
