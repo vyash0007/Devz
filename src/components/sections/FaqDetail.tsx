@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const faqs = [
   {
@@ -61,7 +61,7 @@ const faqs = [
 ];
 
 export const FaqDetail = () => {
-  const [openIds, setOpenIds] = useState<string[]>(["001"]);
+  const [openIds, setOpenIds] = useState<string[]>([]);
 
   const toggleFaq = (id: string) => {
     setOpenIds(prev =>
@@ -70,7 +70,7 @@ export const FaqDetail = () => {
   };
 
   return (
-    <div className="py-12 md:py-24 max-w-4xl mx-auto">
+    <div className="py-8 md:py-12 max-w-4xl mx-auto">
       <div className="space-y-0 relative border-t border-dashed border-border/50">
         {faqs.map((faq) => {
           const isOpen = openIds.includes(faq.id);
@@ -95,23 +95,25 @@ export const FaqDetail = () => {
                 </div>
               </button>
 
-              <AnimatePresence>
-                {isOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pb-10 pl-[4rem] md:pl-[6rem] pr-12">
-                      <p className="text-foreground/60 text-lg md:text-xl font-light leading-relaxed max-w-3xl">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <motion.div
+                initial={false}
+                animate={{
+                  height: isOpen ? 'auto' : 0,
+                  opacity: isOpen ? 1 : 0,
+                }}
+                transition={{
+                  height: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+                  opacity: { duration: 0.24, ease: 'easeOut' },
+                }}
+                className="overflow-hidden"
+                style={{ willChange: 'height, opacity' }}
+              >
+                <div className="pb-10 pl-[4rem] md:pl-[6rem] pr-12">
+                  <p className="text-foreground/60 text-lg md:text-xl font-light leading-relaxed max-w-3xl">
+                    {faq.answer}
+                  </p>
+                </div>
+              </motion.div>
             </div>
           );
         })}

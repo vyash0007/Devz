@@ -9,7 +9,7 @@ const technologies = [
     name: "NEXT.js",
     icon: null,
     style: "font-semibold tracking-tighter text-2xl",
-    hasArrow: true,
+    hasArrow: false,
     link: "https://nextjs.org"
   },
   {
@@ -71,9 +71,11 @@ const technologies = [
 ];
 
 export const EngineeringDetail = () => {
+  const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
+
   return (
-    <div className="py-20 md:py-32">
-      <div className="max-w-4xl mb-20 space-y-8">
+    <div className="py-10 md:py-14">
+      <div className="max-w-4xl mb-10 md:mb-12 space-y-6">
         <h2 className="text-4xl md:text-5xl lg:text-7xl font-medium tracking-tighter leading-[0.95]">
           BUILT ON MODERN
           <br /> <span className="text-blue-400 italic"> TECHNOLOGY STACKS</span>
@@ -86,7 +88,7 @@ export const EngineeringDetail = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-dotted border-foreground/30 relative">
+      <div className="grid grid-cols-2 md:grid-cols-3 border-t border-l border-dotted border-foreground/30 relative">
         {technologies.map((tech, idx) => (
           <motion.a
             key={tech.name}
@@ -96,10 +98,20 @@ export const EngineeringDetail = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.4, delay: 0.4 + idx * 0.2, ease: [0.65, 0, 0.35, 1] }}
-            className="group relative bg-bg flex items-center justify-center p-12 md:p-16 hover:bg-foreground/[0.03] transition-colors duration-500 min-h-[140px] md:min-h-[180px] cursor-pointer border-b border-r border-dotted border-foreground/30"
+            onMouseEnter={() => setHoveredIndex(idx)}
+            onMouseLeave={() => setHoveredIndex(null)}
+            onFocus={() => setHoveredIndex(idx)}
+            onBlur={() => setHoveredIndex(null)}
+            className={`group relative bg-bg flex items-center justify-center p-8 md:p-16 hover:bg-foreground/[0.03] transition-colors duration-500 min-h-[140px] md:min-h-[180px] cursor-pointer border-b border-r border-dotted border-foreground/30 ${tech.name === 'ghost' ? 'hidden md:flex' : 'flex'}`}
           >
             {/* Corner Square */}
-            <div className="absolute top-4 right-4 w-1.5 h-1.5 md:w-2 md:h-2 bg-foreground/20 group-hover:bg-blue-400 transition-colors duration-500" />
+            <div
+              className={`absolute top-4 right-4 w-1.5 h-1.5 md:w-2 md:h-2 transition-all duration-200 ${
+                hoveredIndex === idx
+                  ? 'bg-blue-400 opacity-100 shadow-[0_0_10px_rgba(59,130,246,0.9)]'
+                  : 'bg-blue-400/0 opacity-0'
+              }`}
+            />
 
             {/* Optional Diagonal Arrow */}
             {tech.hasArrow && (

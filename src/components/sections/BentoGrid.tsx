@@ -130,7 +130,7 @@ export const BentoGrid = () => {
           </div>
 
           {/* CMS */}
-          <div className="col-span-12 md:col-span-6 lg:col-span-4 card-border p-6 md:p-8 bg-bg group">
+          {/* <div className="col-span-12 md:col-span-6 lg:col-span-4 card-border p-6 md:p-8 bg-bg group">
             <div className="h-full flex flex-col justify-between">
               <div className="flex flex-col ">
                 <div className="w-12 h-12 bg-foreground/5 border border-border flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
@@ -147,10 +147,10 @@ export const BentoGrid = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* INFRA */}
-          <div className="col-span-12 md:col-span-6 lg:col-span-8 card-border p-6 md:p-8 overflow-hidden bg-bg group flex items-center justify-between">
+          {/* <div className="col-span-12 md:col-span-6 lg:col-span-8 card-border p-6 md:p-8 overflow-hidden bg-bg group flex items-center justify-between">
             <div className="relative z-10 flex flex-col h-full justify-between">
               <div>
                 <div className="w-12 h-12 bg-foreground/5 border border-border flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
@@ -166,10 +166,10 @@ export const BentoGrid = () => {
                   using modern cloud and edge platforms.
                 </p>
               </div>
-            </div>
+            </div> */}
 
-            <Layers size={120} className="text-foreground/5 hidden lg:block pointer-events-none" />
-          </div>
+            {/* <Layers size={120} className="text-foreground/5 hidden lg:block pointer-events-none" />
+          </div> */}
 
         </div>
       </div>
