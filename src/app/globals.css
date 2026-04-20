@@ -17,6 +17,20 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 :root {
@@ -78,12 +92,15 @@ body {
     radial-gradient(120% 120% at 10% -10%, var(--bg-glow-primary) 0%, transparent 55%),
     radial-gradient(90% 100% at 90% 0%, var(--bg-glow-secondary) 0%, transparent 50%),
     linear-gradient(180deg, var(--bg-gradient-top) 0%, var(--bg) 35%, var(--bg-gradient-bottom) 100%);
-  background-attachment: fixed;
+  /* background-attachment: fixed removed — causes major scroll jank on iOS/mobile */
   color: var(--foreground);
   font-family: var(--font-main);
   overflow-x: hidden;
+  scrollbar-gutter: stable;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
 }
 
 .mono {
@@ -97,6 +114,15 @@ body {
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 40px 40px;
   mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), black, transparent 80%);
+  will-change: mask-image;
+}
+
+/* On mobile, skip the mouse-follow mask (no hover/cursor anyway) */
+@media (max-width: 1023px) {
+  .grid-bg {
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent 90%);
+    will-change: auto;
+  }
 }
 
 .flare {
@@ -106,10 +132,18 @@ body {
   background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
   top: var(--y, 50%);
   left: var(--x, 50%);
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
   pointer-events: none;
   z-index: 0;
   mix-blend-mode: var(--flare-blend-mode);
+  will-change: top, left;
+}
+
+/* Reduce or hide the flare on mobile — no cursor to follow, just wasted GPU */
+@media (max-width: 1023px) {
+  .flare {
+    display: none;
+  }
 }
 
 /* Industrial Card Design */
@@ -279,16 +313,18 @@ body {
 
 @keyframes marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 .animate-marquee {
   animation: marquee 40s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .card-border {
@@ -351,6 +387,16 @@ body {
   opacity: var(--noise-opacity);
   pointer-events: none;
   z-index: 100;
+  /* GPU layer promotion to avoid repaints */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduce noise complexity on mobile for better perf */
+@media (max-width: 767px) {
+  .noise {
+    opacity: calc(var(--noise-opacity) * 0.5);
+  }
 }
 
 ::selection {

@@ -10,12 +10,23 @@ export const Hero = () => {
   const containerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // Skip on mobile — there's no cursor, and the flare/grid-bg are hidden via CSS
+    const isMobile = window.matchMedia('(max-width: 1023px)').matches;
+    if (isMobile) return;
+
+    let rafId = 0;
     const handleMove = (e: MouseEvent) => {
-      document.documentElement.style.setProperty('--x', `${e.clientX}px`);
-      document.documentElement.style.setProperty('--y', `${e.clientY}px`);
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--x', `${e.clientX}px`);
+        document.documentElement.style.setProperty('--y', `${e.clientY}px`);
+      });
     };
-    window.addEventListener('mousemove', handleMove);
-    return () => window.removeEventListener('mousemove', handleMove);
+    window.addEventListener('mousemove', handleMove, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', handleMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
