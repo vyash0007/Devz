@@ -35,11 +35,15 @@ export default function DeviceShowcase() {
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (isMobile.current) return;
     
+    const target = e.currentTarget as HTMLElement;
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(() => {
-      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const rect = target.getBoundingClientRect();
+      const x = mouseX - rect.left;
+      const y = mouseY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       

@@ -116,19 +116,7 @@ export default function ProjectsPage() {
                       </p>
                     </div>
 
-                    <div className="space-y-2 pt-1">
-                      <div className="flex justify-between items-center mono text-[9px] text-foreground/20">
-                        <span>DEPLOYMENT_STATUS</span>
-                        <span className="text-blue-500/50">ACTIVE_REACH // 100%</span>
-                      </div>
-                      <div className="h-[2px] w-full bg-border/30 rounded-full overflow-hidden">
-                        <div className="h-full bg-blue-500 w-0 group-hover:w-full transition-all duration-1000 ease-in-out shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
-                      </div>
-                    </div>
 
-                    <div className="mono text-[8px] text-foreground/30 uppercase tracking-[0.32em] pt-1">
-                      ARCHIVE_ENTRY // 0{project.id}
-                    </div>
                   </div>
 
                   <div className="lg:col-span-5">
@@ -139,8 +127,8 @@ export default function ProjectsPage() {
                         alt={project.title} 
                         className="object-cover transition-transform duration-1000 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                       />
-                      <div className="absolute inset-0 shadow-[inset_0_0_120px_rgba(0,0,0,0.45)]" />
-                      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent" />
+                      {/* <div className="absolute inset-0 shadow-[inset_0_0_120px_rgba(0,0,0,0.45)]" />
+                      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent" /> */}
 
                       <div className="absolute top-4 left-4 mono text-[8px] bg-bg/80 backdrop-blur-md border border-border px-3 py-1 text-foreground/40 uppercase tracking-widest">
                         P_TAG // 0{project.id}
@@ -176,7 +164,7 @@ export default function ProjectsPage() {
                 alt={selectedProject.title} 
                 className="object-cover"
               />
-              <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.6)]" />
+              {/* <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.6)]" /> */}
             </div>
 
             {/* Structured Content */}
